@@ -1,0 +1,58 @@
+<head>
+    <meta charset="UTF-8">
+    <title>Plinko</title>
+    <link rel="stylesheet" href="plinko-style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="plinko.html" class="active">Plinko</a></li>
+        </ul>
+        <div class="currency-display">Tokens: <span id="currency"></span></div>
+    </nav>
+    <header>
+        <h1>Plinko Drop Game</h1>
+    </header>
+    <div class="game-container">
+        <div class="left-panel">
+            <label for="bet-amount">Bet Amount:</label>
+            <input type="number" id="bet-amount" min="1" placeholder="Enter your bet">
+            <div class="bet-presets">
+                <button type="button" class="preset-btn" data-value="1">Min</button>
+                <button type="button" class="preset-btn" data-value="10">10</button>
+                <button type="button" class="preset-btn" data-value="100">100</button>
+                <button type="button" class="preset-btn" data-value="1000">1000</button>
+                <button type="button" class="preset-btn" data-value="max">Max</button>
+            </div>
+            <p id="bet-error" class="error-message"></p>
+            <button id="start-game" class="button">Start Game</button>
+            <div id="win-history" class="win-history"></div>
+        </div>
+        <div id="plinko-canvas"></div>
+    </div>
+    <script src="plinko-script.js"></script>
+    <script src="currency.js"></script>
+    <script>
+        updateTokenDisplay();
+
+        // Preset buttons functionality
+        document.querySelectorAll('.preset-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                let value = btn.getAttribute('data-value');
+                if (value === 'max') {
+                    value = getTokens();
+                }
+                document.getElementById('bet-amount').value = value;
+                // Trigger validation
+                const event = new Event('input', { bubbles: true });
+                document.getElementById('bet-amount').dispatchEvent(event);
+            });
+        });
+    </script>
+</body>

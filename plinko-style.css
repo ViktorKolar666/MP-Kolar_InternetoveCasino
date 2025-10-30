@@ -1,0 +1,322 @@
+.bree-serif-regular {
+    font-family: "Bree Serif", serif !important;
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    background-color: rgb(29, 31, 31);
+    font-family: "Pixelify Sans", Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: auto;
+}
+
+h1 {
+    color: rgb(216, 0, 0);
+    font-size: 2em;
+    margin: 20px 0;
+    text-align: center;
+    font-family: "Pixelify Sans", Arial, sans-serif;
+}
+
+p {
+    color: rgb(179, 179, 179);
+    font-family: "Pixelify Sans", Arial, sans-serif;
+    text-align: center;
+}
+
+.padding {
+    padding: 15px 50px 70px;
+}
+
+button {
+    background-color: rgb(216, 0, 0);
+    border-style: solid;
+    border-color: rgb(216, 0, 0);
+    padding: 5px;
+    border-radius: 2px;
+    font-family: "Pixelify Sans", Arial, sans-serif;
+}
+
+.game-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    gap: 20px;
+    padding: 20px;
+    background-color: rgb(40, 40, 40);
+    border-radius: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1200px;
+    box-sizing: border-box;
+    overflow: visible !important; /* nikdy neschovávej obsah */
+}
+
+#plinko-canvas {
+    width: 600px;
+    height: 700px;
+    position: relative;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #1D1F1F;
+    box-sizing: border-box;
+    /* Důležité pro mobilní vzhled */
+    flex-shrink: 0;
+}
+
+#plinko-canvas > canvas {
+    display: block;
+    width: 600px;
+    height: 700px;
+    transform-origin: top left;
+}
+
+.button, #drop {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    background-color: rgb(216, 0, 0);
+    border-style: solid;
+    border-color: rgb(216, 0, 0);
+    padding: 10px 30px;
+    border-radius: 8px;
+    font-family: "Pixelify Sans", Arial, sans-serif;
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+nav {
+    background-color: rgb(29, 31, 31);
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    gap: 30px;
+}
+
+header {
+    margin-top: 60px;
+    text-align: center;
+    color: white;
+    font-family: "Pixelify Sans", Arial, sans-serif;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+li {
+    display: inline;
+}
+
+li a {
+    text-decoration: none;
+    color: rgb(216, 0, 0);
+    padding: 10px 20px;
+    font-family: "Pixelify Sans", Arial, sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+li a:hover {
+    background-color: rgb(216, 0, 0);
+    color: rgb(14, 13, 13);
+    border-radius: 5px;
+}
+
+.active {
+    background-color: rgb(216, 0, 0);
+    color: rgb(14, 13, 13);
+    border-radius: 5px;
+}
+
+.currency-display {
+    color: white;
+    font-family: "Pixelify Sans", Arial, sans-serif;
+    font-size: 1em;
+}
+
+.left-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: rgb(40, 40, 40);
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    font-family: "Pixelify Sans", Arial, sans-serif;
+    width: 200px;
+}
+
+.left-panel label {
+    font-size: 1em;
+}
+
+.left-panel input {
+    padding: 5px;
+    font-size: 1em;
+    border: 1px solid rgb(216, 0, 0);
+    border-radius: 5px;
+    background-color: rgb(29, 31, 31);
+    color: white;
+}
+
+.left-panel input::placeholder {
+    color: rgb(179, 179, 179);
+}
+
+.left-panel button {
+    margin-top: 10px;
+    background-color: rgb(216, 0, 0);
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.left-panel button:hover {
+    background-color: rgb(255, 0, 0);
+}
+
+.error-message {
+    color: rgb(255, 0, 0);
+    font-size: 0.9em;
+    margin: 0;
+    padding: 0;
+    display: none;
+}
+
+.left-panel input.error {
+    border-color: rgb(255, 0, 0);
+}
+
+.left-panel input,
+.left-panel .bet-presets,
+.left-panel button.button {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.bet-presets {
+    display: flex;
+    gap: 8px;
+    margin: 8px 0 0 0;
+}
+
+.preset-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    background: rgb(216, 0, 0);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 0;
+    font-family: "Pixelify Sans", Arial, sans-serif;
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.win-history {
+    margin-top: 18px;
+    background: rgb(34, 34, 34);
+    border-radius: 8px;
+    padding: 10px 8px;
+    min-height: 60px;
+    max-height: 260px;
+    overflow-y: auto;
+    font-size: 0.95em;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.win-entry {
+    font-family: "Pixelify Sans", Arial, sans-serif;
+    padding: 2px 0;
+    border-radius: 4px;
+    text-align: left;
+    font-weight: bold;
+}
+.win-x100 { color: #ffd700; }
+.win-x75, .win-x60 { color: #ff9800; }
+.win-x30, .win-x15, .win-x10 { color: #ff5722; }
+.win-x5, .win-x1 { color: #4caf50; }
+.win-x05 { color: #03a9f4; }
+
+@media (max-width: 900px) {
+    .game-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        width: 100vw;
+        min-width: 0;
+    }
+    #plinko-canvas {
+        max-width: 98vw;
+        min-width: 120px;
+        aspect-ratio: 6/7;
+    }
+    .left-panel {
+        width: 100%;
+        max-width: 400px;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    nav {
+        flex-direction: column;
+        gap: 10px;
+        padding: 6px;
+    }
+    .game-container {
+        padding: 4px;
+        width: 100vw;
+    }
+    .left-panel {
+        padding: 10px;
+        font-size: 0.95em;
+    }
+    #plinko-canvas {
+        width: 100vw;
+        max-width: 100vw;
+        min-width: 100px;
+        aspect-ratio: 6/7;
+    }
+}
+
+@media (max-width: 700px) {
+    .game-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px 0;
+        gap: 10px;
+    }
+    #plinko-canvas {
+        margin: 0 auto;
+    }
+}

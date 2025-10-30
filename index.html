@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Casino simulator</title>
+        <link rel="stylesheet" href="index-style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="plinko.html">Plinko</a></li>
+            </ul>
+            <div class="currency-display">Tokens: <span id="currency"></span></div>
+        </nav>
+        <header>
+            <h1>Casino simulator</h1>
+        </header>
+        <div class="game-cards">
+            <div class="card">
+                <a href="plinko.html">Plinko</a>
+                <p class="description">Drop balls and win prizes!</p>
+            </div>
+            <div class="card">
+                <a href="#">Roulette</a>
+                <p class="description">Spin the wheel and test your luck!</p>
+            </div>
+            <div class="card">
+                <a href="#">Slots</a>
+                <p class="description">Pull the lever and hit the jackpot!</p>
+            </div>
+        </div>
+        <script src="currency.js"></script>
+        <script>
+            updateTokenDisplay();
+        </script>
+        <button id="reset-tokens-btn" class="reset-tokens-btn">Reset tokens</button>
+        <script>
+            document.getElementById("reset-tokens-btn").addEventListener("click", () => {
+                setTokens(100);
+                updateTokenDisplay();
+            });
+        </script>
+    </body>
+</html>

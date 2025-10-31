@@ -7,12 +7,16 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+        <link rel="icon" href="icons/seven.png"> <!--* https://www.flaticon.com/free-icon/seven_9210131?term=casino&page=1&position=31&origin=tag&related_id=9210131 -->
     </head>
     <body>
         <nav>
             <ul>
                 <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="plinko.html">Plinko</a></li>
+                <li><a href="roulette.html" class="notUnlocked">Roulette</a></li>
+                <li><a href="blackjack.html" class="notUnlocked">Blackjack</a></li>
+                <li><a href="coinflip.html" class="notUnlocked">Coinflip</a></li>
             </ul>
             <div class="currency-display">Tokens: <span id="currency"></span></div>
         </nav>
@@ -24,13 +28,17 @@
                 <a href="plinko.html">Plinko</a>
                 <p class="description">Drop balls and win prizes!</p>
             </div>
-            <div class="card">
-                <a href="#">Roulette</a>
+            <div class="card notUnlocked">
+                <a href="roulette.html">Roulette</a>
                 <p class="description">Spin the wheel and test your luck!</p>
             </div>
-            <div class="card">
-                <a href="#">Slots</a>
-                <p class="description">Pull the lever and hit the jackpot!</p>
+            <div class="card notUnlocked">
+                <a href="blackjack.html">Blackjack</a>
+                <p class="description">Try to beat the dealer!</p>
+            </div>
+            <div class="card notUnlocked">
+                <a href="coinflip.html">Coinflip</a>
+                <p class="description">50/50 chance to double your tokens!</p>
             </div>
         </div>
         <script src="currency.js"></script>

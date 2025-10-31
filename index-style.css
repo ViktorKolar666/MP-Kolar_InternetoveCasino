@@ -7,6 +7,9 @@
 body {
     background-color: rgb(29, 31, 31);
     font-family: "Pixelify Sans", Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 h1 {
@@ -40,7 +43,7 @@ nav {
     font-size: 1em;
 }
 
-ul {
+nav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -48,11 +51,11 @@ ul {
     gap: 20px;
 }
 
-li {
+nav li {
     display: inline;
 }
 
-li a {
+nav li a {
     text-decoration: none;
     color: rgb(216, 0, 0);
     padding: 10px 20px;
@@ -60,7 +63,7 @@ li a {
     transition: background-color 0.3s, color 0.3s;
 }
 
-li a:hover {
+nav li a:hover {
     background-color: rgb(216, 0, 0);
     color: rgb(14, 13, 13);
     border-radius: 5px;
@@ -75,7 +78,7 @@ li a:hover {
 .game-cards {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 30px;
     margin-top: 30px;
 }
 
@@ -88,12 +91,6 @@ li a:hover {
     transition: transform 0.3s, box-shadow 0.3s;
     position: relative;
     overflow: hidden;
-}
-
-.card img {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 10px;
 }
 
 .card a {
@@ -109,14 +106,14 @@ li a:hover {
     font-size: 0.9em;
     color: rgb(179, 179, 179);
     margin-top: 10px;
-    opacity: 0; /* Skryjeme popis */
-    transform: translateY(10px); /* Posuneme popis dolů */
-    transition: opacity 0.3s, transform 0.3s; /* Přidáme přechod */
+    opacity: 0; /* hide description */
+    transform: translateY(10px); /* move description down */
+    transition: opacity 0.3s, transform 0.3s; /* add transition */
 }
 
 .card:hover .description {
-    opacity: 1; /* Zobrazíme popis */
-    transform: translateY(0); /* Vrátíme popis na původní pozici */
+    opacity: 1; /* show description */
+    transform: translateY(0); /* returns description to original position */
 }
 
 .card:hover {
@@ -124,7 +121,7 @@ li a:hover {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
-.reset-tokens-btn {
+.reset-tokens-btn { /* button to reset tokens */
     position: fixed;
     right: 30px;
     bottom: 30px;
@@ -146,7 +143,7 @@ li a:hover {
     background: rgb(255, 0, 0);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 900px) { /* for medium screens */
     .game-cards {
         flex-direction: column;
         align-items: center;
@@ -158,7 +155,7 @@ li a:hover {
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 600px) { /* for small screens */
     nav {
         flex-direction: column;
         gap: 10px;
@@ -183,4 +180,14 @@ li a:hover {
         font-size: 1.2em;
         margin: 10px 0;
     }
+}
+
+.notUnlocked {
+    background-image: url("icons/padlock.png"); /* https://www.flaticon.com/free-icon/padlock_181534?term=lock&page=1&position=54&origin=tag&related_id=181534 */
+    pointer-events: none;  /* disable interactions */
+    opacity: 0.5;  /* reduce opacity to indicate locked state */
+    filter: blur(1px); /* add blur effect to indicate locked state */
+    background-size: 40px 40px; /* set size for the padlock icon */
+    background-repeat: no-repeat; /* prevent repeating the icon */
+    background-position: center; /* center the icon */
 }

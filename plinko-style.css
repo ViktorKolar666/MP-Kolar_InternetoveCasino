@@ -10,15 +10,10 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0;
-    min-height: 100vh;
-    overflow-x: auto;
 }
 
 h1 {
     color: rgb(216, 0, 0);
-    font-size: 2em;
-    margin: 20px 0;
     text-align: center;
     font-family: "Pixelify Sans", Arial, sans-serif;
 }
@@ -31,6 +26,47 @@ p {
 
 .padding {
     padding: 15px 50px 70px;
+}
+
+nav {
+    background-color: rgb(29, 31, 31);
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+}
+
+.currency-display {
+    color: white;
+    font-family: "Pixelify Sans", Arial, sans-serif;
+    font-size: 1em;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+nav li {
+    display: inline;
+}
+
+nav li a {
+    text-decoration: none;
+    color: rgb(216, 0, 0);
+    padding: 10px 20px;
+    font-family: "Pixelify Sans", Arial, sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+nav li a:hover {
+    background-color: rgb(216, 0, 0);
+    color: rgb(14, 13, 13);
+    border-radius: 5px;
 }
 
 button {
@@ -94,17 +130,6 @@ button {
     cursor: pointer;
 }
 
-nav {
-    background-color: rgb(29, 31, 31);
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    position: fixed;
-    gap: 30px;
-}
-
 header {
     margin-top: 60px;
     text-align: center;
@@ -112,42 +137,10 @@ header {
     font-family: "Pixelify Sans", Arial, sans-serif;
 }
 
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 20px;
-}
-
-li {
-    display: inline;
-}
-
-li a {
-    text-decoration: none;
-    color: rgb(216, 0, 0);
-    padding: 10px 20px;
-    font-family: "Pixelify Sans", Arial, sans-serif;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-li a:hover {
-    background-color: rgb(216, 0, 0);
-    color: rgb(14, 13, 13);
-    border-radius: 5px;
-}
-
 .active {
     background-color: rgb(216, 0, 0);
     color: rgb(14, 13, 13);
     border-radius: 5px;
-}
-
-.currency-display {
-    color: white;
-    font-family: "Pixelify Sans", Arial, sans-serif;
-    font-size: 1em;
 }
 
 .left-panel {
@@ -319,4 +312,14 @@ li a:hover {
     #plinko-canvas {
         margin: 0 auto;
     }
+}
+
+.notUnlocked {
+    background-image: url("icons/padlock.png"); /* https://www.flaticon.com/free-icon/padlock_181534?term=lock&page=1&position=54&origin=tag&related_id=181534 */
+    pointer-events: none;  /* disable interactions */
+    opacity: 0.5;  /* reduce opacity to indicate locked state */
+    filter: blur(1px); /* add blur effect to indicate locked state */
+    background-size: 40px 40px; /* set size for the padlock icon */
+    background-repeat: no-repeat; /* prevent repeating the icon */
+    background-position: center; /* center the icon */
 }

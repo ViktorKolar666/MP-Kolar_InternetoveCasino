@@ -46,8 +46,8 @@ const multipliers = [0.5, 1, 5, 10, 15, 30, 60, 75, 100, 75, 60, 30, 15, 10, 5, 
 for (let i = 0; i <= rows; i++) {
     const centerDist = Math.abs(i - Math.floor((rows + 1) / 2));
     const maxDist = Math.floor((rows + 1) / 2);
-    const red = Math.round(120 + (255 - 120) * (1 - centerDist / maxDist));
-    const color = `rgb(${red},0,0)`;
+    const green = Math.round(120 + (255 - 120) * (1 - centerDist / maxDist));
+    const color = `rgb(0,${green},0)`;
     slotColors.push(color);
     slotMultipliers.push(`x ${multipliers[i]}`);
     const x = i * slotWidth + slotWidth / 2;
@@ -68,7 +68,7 @@ Events.on(render, "afterRender", () => {
     ctx.textBaseline = "middle";
     slots.forEach(slot => {
         const { x, y } = slot.position;
-        ctx.fillStyle = "white";
+        ctx.fillStyle = "black";
         ctx.fillText(slot.multiplier, x, y);
     });
 });
@@ -171,7 +171,7 @@ startGameBtn.addEventListener("click", () => {
     const dropY = 30;
     const ball = Bodies.circle(randomX, dropY, 10, {
         restitution: 0.6,
-        render: { fillStyle: "red" }
+        render: { fillStyle: "blue" }
     });
     ball.bet = betAmount;
     balls.push(ball);

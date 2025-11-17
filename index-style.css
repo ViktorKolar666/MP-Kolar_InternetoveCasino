@@ -5,7 +5,8 @@
 }
 
 body {
-    background-color: rgb(29, 31, 31);
+    background-color: #0A1914;
+    color: #D9F2EB;
     font-family: "Pixelify Sans", Arial, sans-serif;
     display: flex;
     flex-direction: column;
@@ -13,13 +14,13 @@ body {
 }
 
 h1 {
-    color: rgb(216, 0, 0);
+    color: #2ECC71;
     text-align: center;
     font-family: "Pixelify Sans", Arial, sans-serif;
 }
 
 p {
-    color: rgb(179, 179, 179);
+    color: #D9F2EB;
     font-family: "Pixelify Sans", Arial, sans-serif;
     text-align: center;
 }
@@ -29,7 +30,7 @@ p {
 }
 
 nav {
-    background-color: rgb(29, 31, 31);
+    background-color: #0A1914;
     padding: 10px;
     display: flex;
     justify-content: space-between; 
@@ -38,7 +39,7 @@ nav {
 }
 
 .currency-display {
-    color: white;
+    color: #D9F2EB;
     font-family: "Pixelify Sans", Arial, sans-serif;
     font-size: 1em;
 }
@@ -57,21 +58,21 @@ nav li {
 
 nav li a {
     text-decoration: none;
-    color: rgb(216, 0, 0);
+    color: #2ECC71;
     padding: 10px 20px;
     font-family: "Pixelify Sans", Arial, sans-serif;
     transition: background-color 0.3s, color 0.3s;
 }
 
 nav li a:hover {
-    background-color: rgb(216, 0, 0);
-    color: rgb(14, 13, 13);
+    background-color: #2ECC71;
+    color: #0A1914;
     border-radius: 5px;
 }
 
 .active {
-    background-color: rgb(216, 0, 0);
-    color: rgb(14, 13, 13);
+    background-color: #2ECC71;
+    color: #0A1914;
     border-radius: 5px;
 }
 
@@ -83,7 +84,7 @@ nav li a:hover {
 }
 
 .card {
-    background-color: rgb(40, 40, 40);
+    background-color: #0E2B24;
     border-radius: 10px;
     padding: 20px;
     text-align: center;
@@ -95,7 +96,7 @@ nav li a:hover {
 
 .card a {
     text-decoration: none;
-    color: rgb(216, 0, 0);
+    color: #2ECC71;
     font-family: "Pixelify Sans", Arial, sans-serif;
     font-size: 1.2em;
     display: block;
@@ -104,7 +105,7 @@ nav li a:hover {
 
 .card .description {
     font-size: 0.9em;
-    color: rgb(179, 179, 179);
+    color: #D9F2EB;
     margin-top: 10px;
     opacity: 0; /* hide description */
     transform: translateY(10px); /* move description down */
@@ -125,8 +126,8 @@ nav li a:hover {
     position: fixed;
     right: 30px;
     bottom: 30px;
-    background: rgb(216, 0, 0);
-    color: white;
+    background: #2ECC71;
+    color: #0A1914;
     border: none;
     border-radius: 8px;
     padding: 12px 24px;
@@ -140,7 +141,8 @@ nav li a:hover {
 }
 
 .reset-tokens-btn:hover {
-    background: rgb(255, 0, 0);
+    background: #1ABC9C;
+    color: #0A1914;
 }
 
 @media (max-width: 900px) { /* for medium screens */

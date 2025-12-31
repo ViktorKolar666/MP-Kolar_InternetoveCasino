@@ -324,11 +324,11 @@ header {
 }
 
 .notUnlocked {
-    background-image: url("icons/padlock.png"); /* https://www.flaticon.com/free-icon/padlock_181534?term=lock&page=1&position=54&origin=tag&related_id=181534 */
+    background-image: url("../images/icons/lock.png");
     pointer-events: none;  /* disable interactions */
     opacity: 0.5;  /* reduce opacity to indicate locked state */
     filter: blur(1px); /* add blur effect to indicate locked state */
-    background-size: 40px 40px; /* set size for the padlock icon */
+    background-size: 60px 60px; /* set size for the padlock icon */
     background-repeat: no-repeat; /* prevent repeating the icon */
     background-position: center; /* center the icon */
 }

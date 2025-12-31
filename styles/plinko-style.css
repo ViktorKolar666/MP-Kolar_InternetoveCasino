@@ -1,3 +1,4 @@
+/* --- GLOBAL RESET & FONTS --- */
 .bree-serif-regular {
     font-family: "Bree Serif", serif !important;
     font-weight: 400;
@@ -29,6 +30,7 @@ p {
     padding: 15px 50px 70px;
 }
 
+/* --- NAVBAR STYLES --- */
 nav {
     background-color: #0A1914;
     padding: 10px;
@@ -72,7 +74,7 @@ nav li a:hover {
 
 .active {
     background-color: #2ECC71;
-    color: #0A1914; /* tmavé pro kontrast podle indexu */
+    color: #0A1914; 
     border-radius: 5px;
 }
 
@@ -86,6 +88,7 @@ button {
     font-family: "Pixelify Sans", Arial, sans-serif;
 }
 
+/* --- GAME CONTAINER LAYOUT --- */
 .game-container {
     display: flex;
     justify-content: center;
@@ -93,14 +96,14 @@ button {
     min-height: 80vh;
     gap: 20px;
     padding: 20px;
-    background-color: #0E2B24; /* upraveno podle indexu */
+    background-color: #0E2B24;
     border-radius: 10px;
     margin-top: 20px;
     flex-wrap: wrap;
     width: 100%;
     max-width: 1200px;
     box-sizing: border-box;
-    overflow: visible !important; /* nikdy neschovávej obsah */
+    overflow: visible !important;
 }
 
 #plinko-canvas {
@@ -111,7 +114,7 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #0E2B24; /* upraveno podle indexu */
+    background: #0E2B24;
     box-sizing: border-box;
     flex-shrink: 0;
 }
@@ -144,20 +147,15 @@ header {
     font-family: "Pixelify Sans", Arial, sans-serif;
 }
 
-.active {
-    background-color: #2ECC71;
-    color: #0A1914; /* tmavé pro kontrast podle indexu */
-    border-radius: 5px;
-}
-
+/* --- LEFT PANEL (CONTROLS) --- */
 .left-panel {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    background-color: #0E2B24; /* upraveno podle indexu */
+    background-color: #0E2B24;
     padding: 20px;
     border-radius: 10px;
-    color: #D9F2EB; /* text podle indexu */
+    color: #D9F2EB;
     font-family: "Pixelify Sans", Arial, sans-serif;
     width: 200px;
 }
@@ -241,6 +239,7 @@ header {
     text-align: center;
 }
 
+/* --- WIN HISTORY STYLES --- */
 .win-history {
     margin-top: 18px;
     background: #0E2B24;
@@ -261,13 +260,14 @@ header {
     text-align: left;
     font-weight: bold;
 }
-.win-x100 { color: #ffd700; }            /* zlatá pro top výhru */
-.win-x75, .win-x60 { color: #ff9800; }  /* oranžová pro vysoké násobiče */
-.win-x30, .win-x15, .win-x10 { color: #ff5722; } /* teplejší oranžovo-červená */
-.win-x5 { color: #2ECC71; }             /* primární smaragdová */
-.win-x1 { color: #1ABC9C; }             /* sekundární aqua-green */
-.win-x05 { color: #D9F2EB; }            /* jemná mintová pro nejmenší násobič */
+.win-x100 { color: #ffd700; }
+.win-x75, .win-x60 { color: #ff9800; }
+.win-x30, .win-x15, .win-x10 { color: #ff5722; }
+.win-x5 { color: #2ECC71; }
+.win-x1 { color: #1ABC9C; }
+.win-x05 { color: #D9F2EB; }
 
+/* --- RESPONSIVE MEDIA QUERIES --- */
 @media (max-width: 900px) {
     .game-container {
         flex-direction: column;
@@ -323,143 +323,105 @@ header {
     }
 }
 
+/* --- UTILITY CLASSES --- */
 .notUnlocked {
     background-image: url("../images/icons/lock.png");
-    pointer-events: none;  /* disable interactions */
-    opacity: 0.5;  /* reduce opacity to indicate locked state */
-    filter: blur(1px); /* add blur effect to indicate locked state */
-    background-size: 60px 60px; /* set size for the padlock icon */
-    background-repeat: no-repeat; /* prevent repeating the icon */
-    background-position: center; /* center the icon */
+    pointer-events: none;
+    opacity: 0.5;
+    filter: blur(1px);
+    background-size: 60px 60px;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-/*popup container*/
-.popup{ 
-    /*https://www.w3schools.com/howto/howto_js_popup.asp*/
+/* Tutorial trigger button styling */
+.popup { 
     position: relative;
     display: inline-block;
     cursor: pointer;
-}
-/*popup text*/
-.popup .popuptext {
-  visibility: hidden;
-  width: 160px;
-  background-color: #4a5a52;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 8px 0;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -80px;
-}
-
-/* Popup arrow */
-.popup .popuptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #4a5a52 transparent transparent transparent;
-}
-
-/* Toggle this class when clicking on the popup container (hide and show the popup) */
-.popup .show {
-  visibility: visible;
-  -webkit-animation: fadeIn 1s;
-  animation: fadeIn 1s
-}
-
-/* Add animation (fade in the popup) */
-@-webkit-keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
-}
-
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity:1 ;}
 }
 
 .icon-question {
     width: 16px;
     height: 16px;
+    vertical-align: middle;
+    margin-right: 5px;
 }
 
-.plinko-bin,
-.plinko-panel,
-.bin,
-.slot,
-.bucket,
-.panel {
+/* --- INTERACTIVE TUTORIAL STYLES --- */
+.tutorial-overlay {
+    display: none;
+    position: fixed !important; /* Forces layer on top */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 25, 20, 0.85);
+    z-index: 9999 !important; /* Ensures it is above everything else */
+}
+
+.tutorial-box {
+    position: absolute;
     background-color: #0E2B24;
+    border: 2px solid #2ECC71;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    max-width: 90%;
     color: #D9F2EB;
-    border: 1px solid rgba(46,204,113,0.08);
-    border-radius: 6px;
-    padding: 6px 8px;
-    text-align: center;
-    box-shadow: inset 0 -4px 8px rgba(0,0,0,0.4);
     font-family: "Pixelify Sans", Arial, sans-serif;
-    font-weight: 700;
+    box-shadow: 0 0 20px rgba(46, 204, 113, 0.3);
+    transition: all 0.3s ease;
+    z-index: 10002;
+    /* Default centering */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-.bin.win-x100,
-.plinko-bin.win-x100 {
-    background: linear-gradient(90deg,#ffd700,#ffdf70);
+.tutorial-box h3 {
+    margin-top: 0;
+    color: #2ECC71;
+}
+
+.tut-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.tut-btn-next {
+    background: #2ECC71;
     color: #0A1914;
-    border-color: rgba(255,215,0,0.25);
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: "Pixelify Sans", Arial, sans-serif;
 }
 
-.bin.win-x75,
-.bin.win-x60,
-.plinko-bin.win-x75,
-.plinko-bin.win-x60 {
-    background: linear-gradient(90deg,#ff9800,#ffc07a);
-    color: #0A1914;
-    border-color: rgba(255,152,0,0.20);
-}
-
-.bin.win-x30,
-.bin.win-x15,
-.bin.win-x10,
-.plinko-bin.win-x30,
-.plinko-bin.win-x15,
-.plinko-bin.win-x10 {
-    background: linear-gradient(90deg,#ff5722,#ff8a66);
-    color: #0A1914;
-    border-color: rgba(255,87,34,0.18);
-}
-
-.bin.win-x5,
-.plinko-bin.win-x5 {
-    background: #2ECC71; /* primární smaragdová */
-    color: #0A1914;
-    border-color: rgba(46,204,113,0.22);
-}
-
-.bin.win-x1,
-.plinko-bin.win-x1 {
-    background: #1ABC9C; /* sekundární aqua-green */
-    color: #0A1914;
-    border-color: rgba(26,188,156,0.22);
-}
-
-.bin.win-x05,
-.plinko-bin.win-x05 {
-    background: #0E2B24; /* nejmenší násobič zůstane tmavý */
+.tut-btn-skip {
+    background: transparent;
     color: #D9F2EB;
-    border-color: rgba(217,242,235,0.06);
+    border: 1px solid rgba(217, 242, 235, 0.3);
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: "Pixelify Sans", Arial, sans-serif;
 }
 
-/* jemné centrování labelu inside bin */
-.bin .label,
-.plinko-bin .label {
-    display: block;
-    font-size: 0.95em;
-    line-height: 1;
+.tut-btn-next:hover { background: #1ABC9C; }
+.tut-btn-skip:hover { border-color: #D9F2EB; }
+
+/* The yellow highlight box */
+.highlight-box {
+    position: absolute;
+    border: 3px solid #ffd700;
+    border-radius: 8px;
+    box-shadow: 0 0 15px #ffd700, inset 0 0 10px rgba(255, 215, 0, 0.2);
+    pointer-events: none;
+    transition: all 0.4s ease;
+    z-index: 10001;
+    display: none;
 }

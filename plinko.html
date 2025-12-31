@@ -1,4 +1,5 @@
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Plinko</title>
@@ -9,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
     <link rel="icon" href="images/icons/icon.png">
+</head>
 <body>
     <nav>
         <ul>
@@ -20,17 +22,20 @@
         </ul>
         <div class="currency-display">Tokens: <span id="currency"></span></div>
     </nav>
+
     <header>
         <h1>Plinko</h1>
     </header>
+    
     <div class="game-container">
         <div class="left-panel">
-            <div class="popup" onclick="myFunction()">
+            <div class="popup" onclick="startTutorial()">
                 <p><img src="images/icons/tutorial.png" alt="Question Icon" class="icon-question">Tutorial</p>
-                <span class="popuptext" id="myPopup">Plinko is a game where a dropped ball bounces between pegs and lands in a prize slot. Enter your bet amount and try your luck!</span>
             </div>
+
             <label for="bet-amount">Bet Amount:</label>
             <input type="number" id="bet-amount" min="1" placeholder="Enter your bet">
+            
             <div class="bet-presets">
                 <button type="button" class="preset-btn" data-value="1">Min</button>
                 <button type="button" class="preset-btn" data-value="10">10</button>
@@ -38,19 +43,37 @@
                 <button type="button" class="preset-btn" data-value="1000">1000</button>
                 <button type="button" class="preset-btn" data-value="max">Max</button>
             </div>
+            
             <p id="bet-error" class="error-message"></p>
             <button id="start-game" class="button">Start Game</button>
+            
             <label>Most recent wins:</label>
             <div id="win-history" class="win-history"></div>
         </div>
+        
         <div id="plinko-canvas"></div>
     </div>
+
+    <div id="tutorial-overlay" class="tutorial-overlay">
+        <div id="highlight-box" class="highlight-box"></div>
+        
+        <div id="tutorial-box" class="tutorial-box">
+            <h3 id="tut-title">Welcome!</h3>
+            <p id="tut-text">Tutorial text...</p>
+            <div class="tut-buttons">
+                <button onclick="endTutorial()" class="tut-btn-skip">Skip</button>
+                <button onclick="nextStep()" class="tut-btn-next">Next</button>
+            </div>
+        </div>
+    </div>
+
     <script src="scripts/plinko-script.js"></script>
     <script src="scripts/currency.js"></script>
+    
     <script>
         updateTokenDisplay();
 
-        // Preset buttons functionality
+        // --- PRESET BUTTONS LOGIC ---
         document.querySelectorAll('.preset-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 let value = btn.getAttribute('data-value');
@@ -58,14 +81,139 @@
                     value = getTokens();
                 }
                 document.getElementById('bet-amount').value = value;
-                // Trigger validation
+                // Trigger input event for validation
                 const event = new Event('input', { bubbles: true });
                 document.getElementById('bet-amount').dispatchEvent(event);
             });
         });
-        function myFunction() {
-            var popup = document.getElementById("myPopup");
-            popup.classList.toggle("show");
-        }   
+
+        // --- TUTORIAL LOGIC ---
+        let currentStep = 0;
+        const overlay = document.getElementById('tutorial-overlay');
+        const box = document.getElementById('tutorial-box');
+        const highlight = document.getElementById('highlight-box');
+        const title = document.getElementById('tut-title');
+        const text = document.getElementById('tut-text');
+        const nextBtn = document.querySelector('.tut-btn-next');
+
+        // Tutorial Steps Definition
+        const steps = [
+            {
+                target: null, // Step 0: Intro (Centered)
+                title: "Welcome to Plinko!",
+                text: "The goal is to drop a ball, navigate the maze of pins, and land in a high-value slot."
+            },
+            {
+                target: "#bet-amount", // Step 1: Input
+                title: "Place Your Bet",
+                text: "Enter the amount of tokens you want to wager here. You must have enough funds."
+            },
+            {
+                target: ".bet-presets", // Step 2: Buttons
+                title: "Quick Bets",
+                text: "Alternatively, use these buttons to quickly set your bet amount (Min, Max, etc.)."
+            },
+            {
+                target: "#plinko-canvas", // Step 3: Canvas
+                title: "The Game Board",
+                text: "The ball drops from the top. The edges (x100) pay the most, while the center pays less."
+            },
+            {
+                target: ".win-history", // Step 4: History (UPDATED per request)
+                title: "Win History",
+                text: "Track your last 15 results here. It shows the multiplier hit and the tokens won."
+            },
+            {
+                target: "#start-game", // Step 5: Start
+                title: "Start Playing!",
+                text: "When you are ready, click 'Start Game'. Good luck!"
+            }
+        ];
+
+        function startTutorial() {
+            currentStep = 0;
+            overlay.style.display = "block";
+            showStep(currentStep);
+        }
+
+        function endTutorial() {
+            overlay.style.display = "none";
+        }
+
+        function nextStep() {
+            currentStep++;
+            if (currentStep >= steps.length) {
+                endTutorial();
+            } else {
+                showStep(currentStep);
+            }
+        }
+
+        function showStep(index) {
+            const step = steps[index];
+            title.innerText = step.title;
+            text.innerText = step.text;
+            
+            // Change button text on the last step
+            nextBtn.innerText = (index === steps.length - 1) ? "Play!" : "Next";
+
+            if (step.target) {
+                const targetEl = document.querySelector(step.target);
+                if (targetEl) {
+                    const rect = targetEl.getBoundingClientRect();
+                    const scrollY = window.scrollY;
+                    const scrollX = window.scrollX;
+                    
+                    // Set highlight box position and size
+                    highlight.style.display = "block";
+                    highlight.style.width = (rect.width + 10) + "px"; // +10px padding
+                    highlight.style.height = (rect.height + 10) + "px";
+                    highlight.style.top = (rect.top + scrollY - 5) + "px";
+                    highlight.style.left = (rect.left + scrollX - 5) + "px";
+
+                    // Logic for text box positioning (prevent overlapping)
+                    box.style.transform = "none"; 
+                    
+                    // Desktop logic
+                    if (window.innerWidth > 800) {
+                        // Try placing right, else place left
+                        if (rect.right + 340 < window.innerWidth) {
+                            box.style.left = (rect.right + 20) + "px";
+                            box.style.top = (rect.top + scrollY) + "px";
+                        } else {
+                            box.style.left = (rect.left - 320) + "px";
+                            box.style.top = (rect.top + scrollY) + "px";
+                        }
+                    } else {
+                        // Mobile/Tablet logic
+                        box.style.left = "50%";
+                        box.style.transform = "translateX(-50%)";
+                        
+                        // If element is in lower half, place box above it
+                        if (rect.top > window.innerHeight / 2) {
+                             let topPos = rect.top + scrollY - box.offsetHeight - 20;
+                             if(box.offsetHeight === 0) topPos = rect.top + scrollY - 150; // Fallback
+                             box.style.top = topPos + "px";
+                        } else {
+                            box.style.top = (rect.bottom + scrollY + 20) + "px";
+                        }
+                    }
+                }
+            } else {
+                // Step without target (Intro) -> Center of screen
+                highlight.style.display = "none";
+                box.style.top = "50%";
+                box.style.left = "50%";
+                box.style.transform = "translate(-50%, -50%)";
+            }
+        }
+
+        // Recalculate positions on window resize
+        window.addEventListener('resize', () => {
+            if (overlay.style.display === "block") {
+                showStep(currentStep);
+            }
+        });
     </script>
 </body>
+</html>

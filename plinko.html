@@ -13,14 +13,20 @@
 </head>
 <body>
     <nav>
-        <ul>
+        <div class="nav-top">
+            <div class="currency-display">Tokens: <span id="currency"></span></div>
+            <button id="menu-toggle" class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+
+        <ul id="nav-links" class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="plinko.html" class="active">Plinko</a></li>
             <li><a href="roulette.html" class="notUnlocked">Roulette</a></li>
             <li><a href="blackjack.html" class="notUnlocked">Blackjack</a></li>
             <li><a href="coinflip.html" class="notUnlocked">Coinflip</a></li>
         </ul>
-        <div class="currency-display">Tokens: <span id="currency"></span></div>
     </nav>
 
     <header>
@@ -56,7 +62,6 @@
 
     <div id="tutorial-overlay" class="tutorial-overlay">
         <div id="highlight-box" class="highlight-box"></div>
-        
         <div id="tutorial-box" class="tutorial-box">
             <h3 id="tut-title">Welcome!</h3>
             <p id="tut-text">Tutorial text...</p>
@@ -73,7 +78,17 @@
     <script>
         updateTokenDisplay();
 
-        // --- PRESET BUTTONS LOGIC ---
+        // Burger Menu Logic
+        const nav = document.querySelector('nav');
+        const burger = document.getElementById('menu-toggle');
+        if (burger) {
+            burger.addEventListener('click', () => {
+                const isOpen = nav.classList.toggle('open');
+                burger.setAttribute('aria-expanded', isOpen);
+            });
+        }
+
+        // Preset Buttons Logic
         document.querySelectorAll('.preset-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 let value = btn.getAttribute('data-value');
@@ -81,13 +96,12 @@
                     value = getTokens();
                 }
                 document.getElementById('bet-amount').value = value;
-                // Trigger input event for validation
                 const event = new Event('input', { bubbles: true });
                 document.getElementById('bet-amount').dispatchEvent(event);
             });
         });
 
-        // --- TUTORIAL LOGIC ---
+        // Tutorial Logic
         let currentStep = 0;
         const overlay = document.getElementById('tutorial-overlay');
         const box = document.getElementById('tutorial-box');
@@ -96,35 +110,34 @@
         const text = document.getElementById('tut-text');
         const nextBtn = document.querySelector('.tut-btn-next');
 
-        // Tutorial Steps Definition
         const steps = [
             {
-                target: null, // Step 0: Intro (Centered)
+                target: null,
                 title: "Welcome to Plinko!",
                 text: "The goal is to drop a ball, navigate the maze of pins, and land in a high-value slot."
             },
             {
-                target: "#bet-amount", // Step 1: Input
+                target: "#bet-amount",
                 title: "Place Your Bet",
                 text: "Enter the amount of tokens you want to wager here. You must have enough funds."
             },
             {
-                target: ".bet-presets", // Step 2: Buttons
+                target: ".bet-presets",
                 title: "Quick Bets",
                 text: "Alternatively, use these buttons to quickly set your bet amount (Min, Max, etc.)."
             },
             {
-                target: "#plinko-canvas", // Step 3: Canvas
+                target: "#plinko-canvas",
                 title: "The Game Board",
-                text: "The ball drops from the top. The edges (x100) pay the most, while the center pays less."
+                text: "The ball drops from the top. The edges pay less, while the center pays the most."
             },
             {
-                target: ".win-history", // Step 4: History (UPDATED per request)
+                target: ".win-history",
                 title: "Win History",
                 text: "Track your last 15 results here. It shows the multiplier hit and the tokens won."
             },
             {
-                target: "#start-game", // Step 5: Start
+                target: "#start-game",
                 title: "Start Playing!",
                 text: "When you are ready, click 'Start Game'. Good luck!"
             }
@@ -153,8 +166,6 @@
             const step = steps[index];
             title.innerText = step.title;
             text.innerText = step.text;
-            
-            // Change button text on the last step
             nextBtn.innerText = (index === steps.length - 1) ? "Play!" : "Next";
 
             if (step.target) {
@@ -164,19 +175,15 @@
                     const scrollY = window.scrollY;
                     const scrollX = window.scrollX;
                     
-                    // Set highlight box position and size
                     highlight.style.display = "block";
-                    highlight.style.width = (rect.width + 10) + "px"; // +10px padding
+                    highlight.style.width = (rect.width + 10) + "px";
                     highlight.style.height = (rect.height + 10) + "px";
                     highlight.style.top = (rect.top + scrollY - 5) + "px";
                     highlight.style.left = (rect.left + scrollX - 5) + "px";
 
-                    // Logic for text box positioning (prevent overlapping)
                     box.style.transform = "none"; 
                     
-                    // Desktop logic
                     if (window.innerWidth > 800) {
-                        // Try placing right, else place left
                         if (rect.right + 340 < window.innerWidth) {
                             box.style.left = (rect.right + 20) + "px";
                             box.style.top = (rect.top + scrollY) + "px";
@@ -185,14 +192,11 @@
                             box.style.top = (rect.top + scrollY) + "px";
                         }
                     } else {
-                        // Mobile/Tablet logic
                         box.style.left = "50%";
                         box.style.transform = "translateX(-50%)";
-                        
-                        // If element is in lower half, place box above it
                         if (rect.top > window.innerHeight / 2) {
                              let topPos = rect.top + scrollY - box.offsetHeight - 20;
-                             if(box.offsetHeight === 0) topPos = rect.top + scrollY - 150; // Fallback
+                             if(box.offsetHeight === 0) topPos = rect.top + scrollY - 150;
                              box.style.top = topPos + "px";
                         } else {
                             box.style.top = (rect.bottom + scrollY + 20) + "px";
@@ -200,7 +204,6 @@
                     }
                 }
             } else {
-                // Step without target (Intro) -> Center of screen
                 highlight.style.display = "none";
                 box.style.top = "50%";
                 box.style.left = "50%";
@@ -208,7 +211,6 @@
             }
         }
 
-        // Recalculate positions on window resize
         window.addEventListener('resize', () => {
             if (overlay.style.display === "block") {
                 showStep(currentStep);

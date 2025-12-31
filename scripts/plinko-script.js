@@ -44,7 +44,7 @@ for (let row = 0; row < rows; row++) {
 // Slots & multipliers
 const slotWidth = width / (rows + 1), slotHeight = 60;
 const slots = [], slotColors = [], slotMultipliers = [];
-const multipliers = [0.5, 1, 5, 10, 15, 30, 60, 75, 100, 75, 60, 30, 15, 10, 5, 1, 0.5];
+const multipliers = [0.5, 0.5, 1, 5, 10, 20, 50, 70, 100, 70, 50, 20, 10, 5, 1, 0.5, 0.5];
 for (let i = 0; i <= rows; i++) {
     const centerDist = Math.abs(i - Math.floor((rows + 1) / 2));
     const maxDist = Math.floor((rows + 1) / 2);

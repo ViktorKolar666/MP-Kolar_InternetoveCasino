@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Roulette</title>
+    <link rel="stylesheet" href="styles/roulette-style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/icons/icon.png">
+</head>
+<body>
+    <nav>
+        <div class="nav-top">
+            <div class="currency-display">Tokens: <span id="currency"></span></div>
+            <button id="menu-toggle" class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+
+        <ul id="nav-links" class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="plinko.html">Plinko</a></li>
+            <li><a href="roulette.html" class="active">Roulette</a></li>
+            <li><a href="blackjack.html" class="notUnlocked">Blackjack</a></li>
+            <li><a href="coinflip.html" class="notUnlocked">Coinflip</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>Roulette</h1>
+    </header>
+
+    <div class="game-container">
+        <div class="wheel-section">
+            <div class="wheel-wrapper">
+                <div class="pointer"></div>
+                <canvas id="canvas" width="400" height="400">
+                    Canvas not supported, please use another browser.
+                </canvas>
+            </div>
+        </div>
+
+        <div class="controls-section">
+            <div class="betting-panel">
+                <label>Bet Amount:</label>
+                <input type="number" id="bet-amount" min="1" placeholder="Amount">
+                
+                <div class="selected-bet-display">
+                    Betting on: <span id="selected-bet-text" style="color: #ffd700;">Nothing</span>
+                </div>
+                
+                <button id="spin-btn" class="button">SPIN</button>
+                <div id="message-area" class="message"></div>
+            </div>
+
+            <div class="bet-presets">
+                <button type="button" class="preset-btn" data-value="1">Min</button>
+                <button type="button" class="preset-btn" data-value="10">10</button>
+                <button type="button" class="preset-btn" data-value="100">100</button>
+                <button type="button" class="preset-btn" data-value="1000">1000</button>
+                <button type="button" class="preset-btn" data-value="max">Max</button>
+            </div>
+
+            <div class="roulette-board">
+                <div class="board-cell zero" onclick="selectBet('0')">0</div>
+                
+                <div class="board-col">
+                    <div class="board-cell red" onclick="selectBet('3')">3</div>
+                    <div class="board-cell black" onclick="selectBet('2')">2</div>
+                    <div class="board-cell red" onclick="selectBet('1')">1</div>
+                </div>
+                <div class="board-col">
+                    <div class="board-cell black" onclick="selectBet('6')">6</div>
+                    <div class="board-cell red" onclick="selectBet('5')">5</div>
+                    <div class="board-cell black" onclick="selectBet('4')">4</div>
+                </div>
+                <div class="board-col">
+                    <div class="board-cell red" onclick="selectBet('9')">9</div>
+                    <div class="board-cell black" onclick="selectBet('8')">8</div>
+                    <div class="board-cell red" onclick="selectBet('7')">7</div>
+                </div>
+                <div class="board-col">
+                    <div class="board-cell red" onclick="selectBet('12')">12</div>
+                    <div class="board-cell black" onclick="selectBet('11')">11</div>
+                    <div class="board-cell black" onclick="selectBet('10')">10</div>
+                </div>
+                <div class="board-col">
+                    <div class="board-cell black" onclick="selectBet('15')">15</div>
+                    <div class="board-cell red" onclick="selectBet('14')">14</div>
+                    <div class="board-cell black" onclick="selectBet('13')">13</div>
+                </div>
+                <div class="board-col">
+                    <div class="board-cell red" onclick="selectBet('18')">18</div>
+                    <div class="board-cell black" onclick="selectBet('17')">17</div>
+                    <div class="board-cell red" onclick="selectBet('16')">16</div>
+                </div>
+                <div class="board-col">
+                    <div class="board-cell red" onclick="selectBet('21')">21</div>
+                    <div class="board-cell black" onclick="selectBet('20')">20</div>
+                    <div class="board-cell red" onclick="selectBet('19')">19</div>
+                </div>
+                <div class="board-col">
+                    <div class="board-cell black" onclick="selectBet('24')">24</div>
+                    <div class="board-cell red" onclick="selectBet('23')">23</div>
+                    <div class="board-cell black" onclick="selectBet('22')">22</div>
+                </div>
+                <div class="board-col">
+                    <div class="board-cell red" onclick="selectBet('27')">27</div>
+                    <div class="board-cell black" onclick="selectBet('26')">26</div>
+                    <div class="board-cell red" onclick="selectBet('25')">25</div>
+                </div>
+                <div class="board-col">
+                    <div class="board-cell red" onclick="selectBet('30')">30</div>
+                    <div class="board-cell black" onclick="selectBet('29')">29</div>
+                    <div class="board-cell black" onclick="selectBet('28')">28</div>
+                </div>
+                <div class="board-col">
+                    <div class="board-cell black" onclick="selectBet('33')">33</div>
+                    <div class="board-cell red" onclick="selectBet('32')">32</div>
+                    <div class="board-cell black" onclick="selectBet('31')">31</div>
+                </div>
+                <div class="board-col">
+                    <div class="board-cell red" onclick="selectBet('36')">36</div>
+                    <div class="board-cell black" onclick="selectBet('35')">35</div>
+                    <div class="board-cell red" onclick="selectBet('34')">34</div>
+                </div>
+            </div>
+            
+            <div class="outside-bets">
+                <div class="board-cell wide red-bg" onclick="selectBet('red')">RED</div>
+                <div class="board-cell wide black-bg" onclick="selectBet('black')">BLACK</div>
+                <div class="board-cell wide" onclick="selectBet('even')">EVEN</div>
+                <div class="board-cell wide" onclick="selectBet('odd')">ODD</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/TweenMax.min.js"></script>
+    <script src="scripts/Winwheel.min.js"></script>
+    
+    <script src="scripts/currency.js"></script>
+    <script src="scripts/roulette-script.js"></script>
+    
+    <script>
+        // Navbar Logic
+        updateTokenDisplay();
+        const nav = document.querySelector('nav');
+        const burger = document.getElementById('menu-toggle');
+        if (burger) {
+            burger.addEventListener('click', () => {
+                const isOpen = nav.classList.toggle('open');
+                burger.setAttribute('aria-expanded', isOpen);
+            });
+        }
+    </script>
+</body>
+</html>

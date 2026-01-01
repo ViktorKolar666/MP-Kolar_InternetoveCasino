@@ -1,5 +1,3 @@
-
-
 // Matter.js initialization
 const { Engine, Render, Runner, World, Bodies, Events } = Matter;
 
@@ -44,7 +42,7 @@ for (let row = 0; row < rows; row++) {
 // Slots & multipliers
 const slotWidth = width / (rows + 1), slotHeight = 60;
 const slots = [], slotColors = [], slotMultipliers = [];
-const multipliers = [0.5, 0.5, 1, 5, 10, 20, 50, 70, 100, 70, 50, 20, 10, 5, 1, 0.5, 0.5];
+const multipliers = [0.5, 0.5, 1, 2, 5, 10, 15, 30, 50, 30, 15, 10, 5, 2, 1, 0.5, 0.5];
 for (let i = 0; i <= rows; i++) {
     const centerDist = Math.abs(i - Math.floor((rows + 1) / 2));
     const maxDist = Math.floor((rows + 1) / 2);
@@ -105,10 +103,10 @@ Events.on(engine, "collisionStart", event => {
     });
 });
 
-// Výpis posledních 15 výher
+// Win history
 const winHistory = [];
 function addWinToHistory(multiplier, winAmount) {
-    // Určení třídy podle násobiče
+    // Determine class based on multiplier
     let cls = "";
     if (multiplier >= 100) cls = "win-x100";
     else if (multiplier >= 75) cls = "win-x75";
@@ -180,27 +178,27 @@ startGameBtn.addEventListener("click", () => {
     World.add(world, ball);
 });
 
-// Responzivní zobrazení hrací plochy
+// Responsive canvas resizing
 function resizePlinkoCanvas() {
     const container = document.getElementById("plinko-canvas");
     if (!container) return;
     const canvas = render.canvas;
     const baseWidth = 600, baseHeight = 700;
 
-    // Zjisti dostupnou šířku viewportu (nebo rodiče) a výšku okna
+    // Available space
     const availWidth = Math.min(window.innerWidth, container.parentElement.offsetWidth || window.innerWidth);
     const availHeight = window.innerHeight - container.getBoundingClientRect().top - 30;
 
-    // Spočítej škálovací faktor tak, aby se plocha vešla na šířku i výšku, ale nikdy nebyla větší než originál
+    // Calculate scaling factor to fit the area within width and height, but never larger than original
     const scale = Math.min(availWidth / baseWidth, availHeight / baseHeight, 1);
 
-    // Nastav škálování canvasu
+    // Set canvas scaling
     canvas.style.transform = `scale(${scale})`;
     canvas.style.transformOrigin = "top center";
     canvas.style.width = baseWidth + "px";
     canvas.style.height = baseHeight + "px";
 
-    // Kontejner má vždy velikost nativního canvasu (kvůli centrování flexem)
+    // Container always has the native canvas size (for centering with flex)
     container.style.width = baseWidth + "px";
     container.style.height = baseHeight + "px";
     container.style.display = "flex";

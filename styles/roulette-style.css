@@ -1,4 +1,4 @@
-/* --- GLOBAL RESET & FONTS --- */
+/* GLOBAL RESET & FONTS */
 .bree-serif-regular {
     font-family: "Bree Serif", serif !important;
     font-weight: 400;
@@ -45,7 +45,7 @@ p {
     padding: 15px 50px 70px;
 }
 
-/* --- NAVBAR STYLES (PC DEFAULT) --- */
+/* NAVBAR STYLES */
 nav {
     background-color: #0A1914;
     padding: 10px 20px;
@@ -53,13 +53,13 @@ nav {
     position: relative; /* Necessary for absolute positioning of nav-top */
     display: flex;
     align-items: center;
-    justify-content: center; /* Centers the Links (ul) */
+    justify-content: center; /* Centers the Links */
     min-height: 60px;
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 
-/* Wrapper for Tokens & Burger - Positioned Absolute Right on PC */
+/* Wrapper for Tokens & Burgermenu */
 .nav-top {
     position: absolute;
     right: 20px;
@@ -114,13 +114,16 @@ nav {
     background-image: url("../images/icons/lock.png");
     pointer-events: none;
     opacity: 0.5;
-    filter: blur(1.5px); /* Blur effect */
+    filter: blur(1px);
     background-size: 40px 40px;
     background-repeat: no-repeat;
-    background-position: center; /* Lock in the center */
+    background-position: center;
 }
 
-/* Burger menu (Hidden on PC) */
+.popup { position: relative; display: inline-block; cursor: pointer; }
+.icon-question { width: 16px; height: 16px; vertical-align: middle; margin-right: 5px; }
+
+/* Burgermenu */
 .burger {
     display: none;
     flex-direction: column;
@@ -209,7 +212,7 @@ nav {
 
 .message { width: 100%; text-align: center; font-weight: bold; min-height: 24px; color: #ffd700; margin-top: 5px;}
 
-/* --- BET PRESET BUTTONS (New) --- */
+/* BET PRESET BUTTONS */
 .bet-presets {
     display: flex;
     gap: 5px;
@@ -286,9 +289,9 @@ nav {
 .red-bg { background-color: #e74c3c; }
 .black-bg { background-color: #1f2a36; }
 
-/* RESPONSIVENESS*/
+/* RESPONSIVENESS */
 
-/* Tablets and smaller PCs (Burger Menu active) */
+/* Small devices */
 @media (max-width: 900px) {
     /* Navbar Layout for Mobile/Tablet */
     nav {
@@ -337,15 +340,12 @@ nav {
     }
     .nav-links a:last-child { border-bottom: none; }
 
-    /* NOTE: We removed the specific mobile .notUnlocked style
-       so it inherits the global style (centered lock + blur) */
-
     /* Wheel resizing for tablets */
     .wheel-wrapper { width: 300px; height: 300px; }
     #canvas { width: 300px; height: 300px; }
 }
 
-/* Mobile Phones (Game Full Width) */
+/* Mobile Phones */
 @media (max-width: 600px) {
     .game-container {
         padding: 0;
@@ -373,4 +373,55 @@ nav {
     /* Further reduce wheel size */
     .wheel-wrapper { width: 280px; height: 280px; }
     #canvas { width: 280px; height: 280px; }
+}
+
+/* Tutorial Styles */
+.tutorial-overlay {
+    display: none;
+    position: fixed !important;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(10, 25, 20, 0.85);
+    z-index: 9999 !important;
+    overflow: hidden; 
+}
+
+.tutorial-box {
+    position: fixed;
+    background-color: #0E2B24;
+    border: 2px solid #2ECC71;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    max-width: 90%;
+    color: #D9F2EB;
+    font-family: "Pixelify Sans", Arial, sans-serif;
+    box-shadow: 0 0 20px rgba(46, 204, 113, 0.3);
+    transition: top 0.3s ease, left 0.3s ease;
+    z-index: 10002;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+}
+
+.tutorial-box h3 { margin-top: 0; color: #2ECC71; }
+.tut-buttons { display: flex; justify-content: space-between; margin-top: 20px; }
+
+.tut-btn-next {
+    background: #2ECC71; color: #0A1914; border: none; padding: 8px 20px;
+    border-radius: 5px; cursor: pointer; font-weight: bold; font-family: "Pixelify Sans", Arial, sans-serif;
+}
+.tut-btn-skip {
+    background: transparent; color: #D9F2EB; border: 1px solid rgba(217, 242, 235, 0.3);
+    padding: 8px 15px; border-radius: 5px; cursor: pointer; font-family: "Pixelify Sans", Arial, sans-serif;
+}
+.tut-btn-next:hover { background: #1ABC9C; }
+.tut-btn-skip:hover { border-color: #D9F2EB; }
+
+.highlight-box {
+    position: fixed;
+    border: 3px solid #ffd700;
+    border-radius: 8px;
+    box-shadow: 0 0 15px #ffd700, inset 0 0 10px rgba(255, 215, 0, 0.2);
+    pointer-events: none;
+    transition: all 0.4s ease;
+    z-index: 10001;
+    display: none;
 }

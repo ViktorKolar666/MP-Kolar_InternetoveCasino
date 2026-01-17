@@ -143,14 +143,41 @@
             }
         ];
 
+        function preventDefault(e) {
+            e.preventDefault();
+        }
+
+        function disableUserScroll() {
+            window.addEventListener('wheel', preventDefault, { passive: false });
+            window.addEventListener('touchmove', preventDefault, { passive: false });
+            window.addEventListener('keydown', preventDefaultForScrollKeys, { passive: false });
+        }
+
+        function enableUserScroll() {
+            window.removeEventListener('wheel', preventDefault, { passive: false });
+            window.removeEventListener('touchmove', preventDefault, { passive: false });
+            window.removeEventListener('keydown', preventDefaultForScrollKeys, { passive: false });
+        }
+
+        function preventDefaultForScrollKeys(e) {
+            const keys = {37: 1, 38: 1, 39: 1, 40: 1, 32: 1, 33: 1, 34: 1, 35: 1, 36: 1};
+            if (keys[e.keyCode]) {
+                preventDefault(e);
+                return false;
+            }
+        }
+
         function startTutorial() {
             currentStep = 0;
             overlay.style.display = "block";
+            disableUserScroll();
             showStep(currentStep);
         }
 
         function endTutorial() {
             overlay.style.display = "none";
+            enableUserScroll();
+            currentTargetEl = null;
         }
 
         function nextStep() {
@@ -159,6 +186,36 @@
                 endTutorial();
             } else {
                 showStep(currentStep);
+            }
+        }
+
+        let currentTargetEl = null;
+
+        function updateHighlightPosition() {
+            if (!currentTargetEl) return;
+            
+            const rect = currentTargetEl.getBoundingClientRect();
+            
+            highlight.style.width = (rect.width + 10) + "px";
+            highlight.style.height = (rect.height + 10) + "px";
+            highlight.style.top = (rect.top - 5) + "px";
+            highlight.style.left = (rect.left - 5) + "px";
+
+            box.style.position = 'fixed';
+            box.style.transform = "translateX(-50%)";
+            box.style.left = "50%";
+            
+            const boxHeight = box.offsetHeight || 200;
+            const spaceAbove = rect.top;
+            const spaceBelow = window.innerHeight - rect.bottom;
+            
+            if (spaceBelow > boxHeight + 20) {
+                box.style.top = (rect.bottom + 20) + "px";
+            } else if (spaceAbove > boxHeight + 20) {
+                box.style.top = (rect.top - boxHeight - 20) + "px";
+            } else {
+                box.style.top = "50%";
+                box.style.transform = "translate(-50%, -50%)";
             }
         }
 
@@ -171,40 +228,18 @@
             if (step.target) {
                 const targetEl = document.querySelector(step.target);
                 if (targetEl) {
-                    const rect = targetEl.getBoundingClientRect();
-                    const scrollY = window.scrollY;
-                    const scrollX = window.scrollX;
-                    
+                    currentTargetEl = targetEl;
                     highlight.style.display = "block";
-                    highlight.style.width = (rect.width + 10) + "px";
-                    highlight.style.height = (rect.height + 10) + "px";
-                    highlight.style.top = (rect.top + scrollY - 5) + "px";
-                    highlight.style.left = (rect.left + scrollX - 5) + "px";
-
-                    box.style.transform = "none"; 
-                    
-                    if (window.innerWidth > 800) {
-                        if (rect.right + 340 < window.innerWidth) {
-                            box.style.left = (rect.right + 20) + "px";
-                            box.style.top = (rect.top + scrollY) + "px";
-                        } else {
-                            box.style.left = (rect.left - 320) + "px";
-                            box.style.top = (rect.top + scrollY) + "px";
-                        }
-                    } else {
-                        box.style.left = "50%";
-                        box.style.transform = "translateX(-50%)";
-                        if (rect.top > window.innerHeight / 2) {
-                             let topPos = rect.top + scrollY - box.offsetHeight - 20;
-                             if(box.offsetHeight === 0) topPos = rect.top + scrollY - 150;
-                             box.style.top = topPos + "px";
-                        } else {
-                            box.style.top = (rect.bottom + scrollY + 20) + "px";
-                        }
-                    }
+                    targetEl.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+                    setTimeout(() => {
+                        updateHighlightPosition();
+                    }, 500); 
+                    updateHighlightPosition();
                 }
             } else {
+                currentTargetEl = null;
                 highlight.style.display = "none";
+                box.style.position = 'fixed';
                 box.style.top = "50%";
                 box.style.left = "50%";
                 box.style.transform = "translate(-50%, -50%)";
@@ -213,7 +248,12 @@
 
         window.addEventListener('resize', () => {
             if (overlay.style.display === "block") {
-                showStep(currentStep);
+                if(currentTargetEl) {
+                    currentTargetEl.scrollIntoView({ block: "center", inline: "center" });
+                    setTimeout(updateHighlightPosition, 100);
+                } else {
+                    updateHighlightPosition();
+                }
             }
         });
     </script>

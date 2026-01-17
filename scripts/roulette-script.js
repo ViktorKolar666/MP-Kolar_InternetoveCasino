@@ -84,8 +84,8 @@ spinBtn.addEventListener('click', () => {
         messageArea.style.color = "#ffd700";
         return;
     }
-    if (betAmount > getTokens()) {
-        messageArea.innerText = "Not enough tokens!";
+    if (betAmount > getTokens() / 2) {
+        messageArea.innerText = "Bet cannot exceed half of your current tokens!";
         messageArea.style.color = "red";
         return;
     }

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blackjack</title>
+    <link rel="stylesheet" href="styles/blackjack-style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/icons/icon.png">
+</head>
+<body>
+    <nav>
+        <div class="nav-top">
+            <div class="currency-display">Tokens: <span id="currency"></span></div>
+            <button id="menu-toggle" class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+
+        <ul id="nav-links" class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="coinflip.html" class="notUnlocked">Coinflip</a></li>
+            <li><a href="roulette.html">Roulette</a></li>
+            <li><a href="blackjack.html" class="active">Blackjack</a></li>
+            <li><a href="plinko.html">Plinko</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>Blackjack</h1>
+    </header>
+
+    <div class="game-container">
+        <div class="blackjack-board">
+            
+            <div class="hand-section">
+                <h2>Dealer <span id="dealer-score" class="score-badge">0</span></h2>
+                <div id="dealer-cards" class="cards-container">
+                    <div class="card-placeholder"></div>
+                    <div class="card-placeholder"></div>
+                </div>
+            </div>
+
+            <div class="divider">
+                <div id="game-message" class="game-message">Place your bet to start</div>
+            </div>
+
+            <div class="hand-section">
+                <h2>You <span id="player-score" class="score-badge">0</span></h2>
+                <div id="player-cards" class="cards-container">
+                    <div class="card-placeholder"></div>
+                    <div class="card-placeholder"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls-section">
+            
+            <div id="betting-controls" class="betting-panel">
+                <label>Bet Amount:</label>
+                <input type="number" id="bet-amount" min="1" placeholder="Amount">
+                
+                <div class="bet-presets">
+                    <button type="button" class="preset-btn" data-value="1">Min</button>
+                    <button type="button" class="preset-btn" data-value="10">10</button>
+                    <button type="button" class="preset-btn" data-value="100">100</button>
+                    <button type="button" class="preset-btn" data-value="1000">1000</button>
+                    <button type="button" class="preset-btn" data-value="max">Max</button>
+                </div>
+
+                <button id="deal-btn" class="button action-btn">DEAL</button>
+            </div>
+
+            <div id="game-actions" class="action-panel" style="display: none;">
+                <button id="hit-btn" class="button action-btn">HIT</button>
+                <button id="stand-btn" class="button action-btn secondary">STAND</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/currency.js"></script>
+    <script src="scripts/blackjack-script.js"></script>
+    
+    <script>
+        // Navbar Logic
+        updateTokenDisplay();
+        const nav = document.querySelector('nav');
+        const burger = document.getElementById('menu-toggle');
+        if (burger) {
+            burger.addEventListener('click', () => {
+                const isOpen = nav.classList.toggle('open');
+                burger.setAttribute('aria-expanded', isOpen);
+            });
+        }
+    </script>
+</body>
+</html>

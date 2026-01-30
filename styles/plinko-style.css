@@ -1,4 +1,4 @@
-/* GLOBAL RESET & FONTS */
+/* --- GLOBAL RESET & FONTS --- */
 .bree-serif-regular {
     font-family: "Bree Serif", serif !important;
     font-weight: 400;
@@ -35,21 +35,21 @@ p {
     text-align: center;
 }
 
-/* NAVBAR (PC DEFAULT) */
+/* --- NAVBAR --- */
 nav {
     background-color: #0A1914;
     padding: 10px 20px;
     width: 100%;
-    position: relative; /* Necessary for absolute positioning of tokens */
+    position: relative; /* necessary for absolute positioning of tokens */
     display: flex;
     align-items: center;
-    justify-content: center; /* Centers the Links */
+    justify-content: center; /* centers the links */
     min-height: 60px;
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 
-/* Wrapper for Tokens & Burgermenu - Positioned to the Right on PC */
+/* wrapper for tokens & burgermenu - positioned to the right on PC */
 .nav-top {
     position: absolute;
     right: 20px;
@@ -68,7 +68,7 @@ nav {
     white-space: nowrap;
 }
 
-/* Links - centered */
+/* links - centered */
 .nav-links {
     list-style-type: none;
     margin: 0;
@@ -101,7 +101,7 @@ nav {
     color: #0A1914;
 }
 
-/* Burgermenu for small devices */
+/* burgermenu for small devices */
 .burger {
     display: none;
     flex-direction: column;
@@ -122,7 +122,13 @@ nav {
     border-radius: 2px;
 }
 
-/* GAME LAYOUT */
+.notUnlocked {
+    background-image: url("../images/icons/lock.png");
+    pointer-events: none; opacity: 0.5; filter: blur(1px);
+    background-size: 60px 60px; background-repeat: no-repeat; background-position: center;
+}
+
+/* --- GAME LAYOUT --- */
 header {
     margin-top: 20px;
     text-align: center;
@@ -166,7 +172,7 @@ header {
     transform-origin: top center;
 }
 
-/* LEFT PANEL */
+/* --- LEFT PANEL --- */
 .left-panel {
     display: flex;
     flex-direction: column;
@@ -224,7 +230,7 @@ header {
     transition: background 0.2s;
 }
 
-/* Win History */
+/* --- WIN HISTORY --- */
 .win-history {
     margin-top: 10px;
     background: #0A1914;
@@ -249,9 +255,9 @@ header {
 .win-x1 { color: #1ABC9C; }
 .win-x05 { color: #D9F2EB; opacity: 0.7; }
 
-/* RESPONSIVENESS */
+/* --- RESPONSIVENESS --- */
 
-/* Tablet & Mobile Menu Trigger */
+/* tablet & mobile menu trigger */
 @media (max-width: 900px) {
     nav {
         flex-direction: column;
@@ -260,17 +266,17 @@ header {
         justify-content: flex-start;
     }
 
-    /* Reset absolute position for mobile */
+    /* reset absolute position for mobile */
     .nav-top {
         position: static;
         transform: none;
         width: 100%;
         display: flex;
-        justify-content: space-between; /* Tokens on Left, Burgermenu on Right */
+        justify-content: space-between; /* tokens on left, burgermenu on right */
         margin-bottom: 5px;
     }
 
-    .burger { display: flex; } /* Show burgermenu */
+    .burger { display: flex; } /* show burgermenu */
 
     .nav-links {
         display: none;
@@ -286,6 +292,7 @@ header {
     nav.open .nav-links { display: flex; }
 
     .nav-links li { width: 100%; display: block; }
+
     .nav-links a {
         display: block;
         padding: 15px;
@@ -297,7 +304,7 @@ header {
 
     /* game layout adjustments */
     .game-container {
-        /* COLUMN = 1. Left Panel (Bet), 2. Plinko Canvas (Game) */
+        /* COLUMN = 1. left panel (bet), 2. plinko canvas (game) */
         flex-direction: column; 
         align-items: center;
         padding: 10px;
@@ -307,7 +314,7 @@ header {
     .left-panel { width: 100%; max-width: 500px; }
 }
 
-/* mobile phones (Game is full width of device) */
+/* mobile phones */
 @media (max-width: 600px) {
     .game-container {
         padding: 0;
@@ -330,17 +337,12 @@ header {
     }
 }
 
-/* UTILITY & TUTORIAL */
-.notUnlocked {
-    background-image: url("../images/icons/lock.png");
-    pointer-events: none; opacity: 0.5; filter: blur(1px);
-    background-size: 60px 60px; background-repeat: no-repeat; background-position: center;
-}
+/* --- UTILITY & TUTORIAL --- */
 
 .popup { position: relative; display: inline-block; cursor: pointer; }
 .icon-question { width: 16px; height: 16px; vertical-align: middle; margin-right: 5px; }
 
-/* Tutorial Styles */
+/* tutorial styles */
 .tutorial-overlay {
     display: none;
     position: fixed !important;
@@ -365,18 +367,40 @@ header {
     top: 50%; left: 50%; transform: translate(-50%, -50%);
 }
 
-.tutorial-box h3 { margin-top: 0; color: #2ECC71; }
-.tut-buttons { display: flex; justify-content: space-between; margin-top: 20px; }
+.tutorial-box h3 { 
+    margin-top: 0;
+    color: #2ECC71;
+}
+
+.tut-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
 
 .tut-btn-next {
-    background: #2ECC71; color: #0A1914; border: none; padding: 8px 20px;
-    border-radius: 5px; cursor: pointer; font-weight: bold; font-family: "Pixelify Sans", Arial, sans-serif;
+    background: #2ECC71;
+    color: #0A1914;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: "Pixelify Sans", Arial, sans-serif;
 }
+
 .tut-btn-skip {
-    background: transparent; color: #D9F2EB; border: 1px solid rgba(217, 242, 235, 0.3);
-    padding: 8px 15px; border-radius: 5px; cursor: pointer; font-family: "Pixelify Sans", Arial, sans-serif;
+    background: transparent;
+    color: #D9F2EB;
+    border: 1px solid rgba(217, 242, 235, 0.3);
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: "Pixelify Sans", Arial, sans-serif;
 }
+
 .tut-btn-next:hover { background: #1ABC9C; }
+
 .tut-btn-skip:hover { border-color: #D9F2EB; }
 
 .highlight-box {

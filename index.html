@@ -19,37 +19,42 @@
             </div>
             <ul id="nav-links" class="nav-links">
                 <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="plinko.html">Plinko</a></li>
-                <li><a href="roulette.html">Roulette</a></li>
-                <li><a href="blackjack.html" class="notUnlocked">Blackjack</a></li>
                 <li><a href="coinflip.html" class="notUnlocked">Coinflip</a></li>
+                <li><a href="roulette.html">Roulette</a></li>
+                <li><a href="blackjack.html">Blackjack</a></li>
+                <li><a href="plinko.html">Plinko</a></li>
             </ul>
         </nav>
+
         <header>
             <h1>Casino simulator</h1>
         </header>
+
         <div class="game-cards">
-            <div class="card">
-                <a href="plinko.html">Plinko</a>
-                <p class="description">Drop balls and win prizes!</p>
+            <div class="card notUnlocked">
+                <a href="coinflip.html">Coinflip</a>
+                <p class="description">50/50 chance to double your tokens!</p>
             </div>
             <div class="card">
                 <a href="roulette.html">Roulette</a>
                 <p class="description">Spin the wheel and test your luck!</p>
             </div>
-            <div class="card notUnlocked">
+            <div class="card">
                 <a href="blackjack.html">Blackjack</a>
                 <p class="description">Try to beat the dealer!</p>
             </div>
-            <div class="card notUnlocked">
-                <a href="coinflip.html">Coinflip</a>
-                <p class="description">50/50 chance to double your tokens!</p>
+            <div class="card">
+                <a href="plinko.html">Plinko</a>
+                <p class="description">Drop balls and win prizes!</p>
             </div>
         </div>
+
         <script src="scripts/currency.js"></script>
+
         <script>
             updateTokenDisplay();
         </script>
+
         <button id="reset-tokens-btn" class="reset-tokens-btn">Reset tokens</button>
         <script>
             const nav = document.querySelector('nav');

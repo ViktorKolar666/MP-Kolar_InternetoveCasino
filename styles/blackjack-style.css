@@ -1,0 +1,327 @@
+/* --- GLOBAL RESET & FONTS --- */
+.bree-serif-regular { font-family: "Bree Serif", serif !important; }
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+    background-color: #0A1914;
+    color: #D9F2EB;
+    font-family: "Pixelify Sans", Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0; padding: 0; overflow-x: hidden;
+}
+
+h1 {
+    color: #2ECC71;
+    margin-top: 20px;
+    font-family: "Pixelify Sans", sans-serif;
+}
+
+h2 {
+    margin: 0 0 10px 0;
+    font-size: 1.2em;
+    color: #2ECC71;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* NAVBAR */
+nav {
+    background-color: #0A1914;
+    padding: 10px 20px;
+    width: 100%;
+    position: relative; /* necessary for absolute positioning of tokens */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* centers the links */
+    min-height: 60px;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.nav-top {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.currency-display {
+    color: #D9F2EB;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #2ECC71;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    background-color: #2ECC71;
+    color: #0A1914;
+}
+
+.burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    border: 1px solid rgba(46,204,113,0.6);
+    padding: 8px;
+    cursor: pointer;
+    background: transparent;
+}
+
+.burger span {
+    display: block;
+    width: 24px;
+    height: 3px;
+    background: #2ECC71;
+}
+
+.notUnlocked {
+    background-image: url("../images/icons/lock.png");
+    pointer-events: none; opacity: 0.5; filter: blur(1px);
+    background-size: 60px 60px; background-repeat: no-repeat; background-position: center;
+}
+
+/* --- BLACKJACK LAYOUT --- */
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+}
+
+.blackjack-board {
+    background-color: #0E2B24;
+    border-radius: 15px;
+    border: 4px solid #1f4037;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-height: 400px;
+}
+
+.hand-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 150px;
+}
+
+.cards-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    min-height: 120px;
+}
+
+.divider {
+    border-top: 2px dashed rgba(46, 204, 113, 0.2);
+    margin: 10px 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.game-message {
+    background-color: #0E2B24;
+    padding: 0 15px;
+    color: #ffd700;
+    font-weight: bold;
+    margin-top: -12px; /* Pull text up to the line */
+    font-size: 1.1em;
+}
+
+.score-badge {
+    background: #0A1914;
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 0.9em;
+    border: 1px solid #2ECC71;
+}
+
+/* --- CARD STYLES --- */
+.card {
+    width: 80px;
+    height: 120px;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px;
+    font-family: Arial, sans-serif; /* cards need clean fonts */
+    font-weight: bold;
+    user-select: none;
+    animation: dealCard 0.3s ease-out;
+}
+
+@keyframes dealCard {
+    from { transform: translateY(-20px) scale(0.8); opacity: 0; }
+    to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.card.red { color: #e74c3c; }
+.card.black { color: #2c3e50; }
+
+.card-top { font-size: 1.2em; text-align: left; line-height: 1; }
+.card-center { 
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+    font-size: 2.5em; 
+}
+.card-bottom { font-size: 1.2em; text-align: right; line-height: 1; transform: rotate(180deg); }
+
+/* bard back - hidden dealer card */
+.card.hidden {
+    background: repeating-linear-gradient(
+        45deg,
+        #e74c3c,
+        #e74c3c 10px,
+        #fff 10px,
+        #fff 20px
+    );
+    border: 2px solid #fff;
+}
+.card.hidden * { display: none; } /* hide content */
+
+/* placeholder for empty table */
+.card-placeholder {
+    width: 80px; height: 120px;
+    border: 2px dashed rgba(255,255,255,0.1);
+    border-radius: 6px;
+}
+
+/* --- CONTROLS --- */
+.controls-section {
+    width: 100%;
+    background-color: #0E2B24;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.betting-panel {
+    width: 100%; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+    align-items: center; 
+}
+
+.betting-panel input {
+    padding: 10px; 
+    width: 100%; 
+    border: 1px solid #2ECC71; 
+    border-radius: 5px; 
+    background: #0A1914; 
+    color: #D9F2EB; 
+}
+
+.bet-presets {
+    display: flex;
+    gap: 5px;
+    width: 100%;
+    justify-content: center;
+}
+
+.preset-btn {
+     flex: 1;
+     background: #2ECC71;
+     color: #0A1914;
+     border: none;
+     padding: 8px 0;
+     border-radius: 5px;
+     cursor: pointer;
+     font-family: "Pixelify Sans", sans-serif;
+}
+
+.preset-btn:hover { 
+    background: #1ABC9C; 
+}
+
+.action-panel { 
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    justify-content: center; 
+}
+
+.action-btn {
+    padding: 15px 40px;
+    font-size: 1.2em;
+    background:#2ECC71;
+    color: #0A1914;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: "Pixelify Sans",
+    sans-serif;
+    font-weight: bold;
+    min-width: 120px;
+}
+.action-btn:hover { 
+    background: #1ABC9C; 
+}
+
+.action-btn.secondary { 
+    background: #e74c3c; color: white; 
+}
+
+.action-btn.secondary:hover {
+     background: #c0392b; 
+}
+
+.action-btn:disabled { 
+    background: #555; cursor: not-allowed; opacity: 0.7; 
+}
+
+/* MEDIA QUERIES (Mobile) */
+@media (max-width: 900px) {
+    nav { flex-direction: column; padding: 10px 15px; align-items: stretch; justify-content: flex-start; }
+    .nav-top { position: static; transform: none; width: 100%; justify-content: space-between; margin-bottom: 5px; }
+    .burger { display: flex; }
+    .nav-links { display: none; flex-direction: column; background: #0E2B24; margin-top: 10px; border-radius: 8px; }
+    nav.open .nav-links { display: flex; }
+    .nav-links a { border-bottom: 1px solid rgba(46, 204, 113, 0.1); display: block; text-align: center; }
+    
+    .card { width: 60px; height: 90px; }
+    .card-top, .card-bottom { font-size: 1em; }
+    .card-center { font-size: 1.8em; }
+    .card-placeholder { width: 60px; height: 90px; }
+}
+
+@media (max-width: 600px) {
+    .game-container { padding: 5px; }
+    .controls-section { padding: 15px; }
+    .action-btn { padding: 12px 20px; font-size: 1em; min-width: 90px; }
+}

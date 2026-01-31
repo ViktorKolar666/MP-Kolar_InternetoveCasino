@@ -339,8 +339,18 @@ header {
 
 /* --- UTILITY & TUTORIAL --- */
 
-.popup { position: relative; display: inline-block; cursor: pointer; }
-.icon-question { width: 16px; height: 16px; vertical-align: middle; margin-right: 5px; }
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.icon-question {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
 
 /* tutorial styles */
 .tutorial-overlay {

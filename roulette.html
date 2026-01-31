@@ -161,6 +161,8 @@
     
     <script>
         updateTokenDisplay();
+
+        // navbar logic
         const nav = document.querySelector('nav');
         const burger = document.getElementById('menu-toggle');
         if (burger) {
@@ -169,7 +171,8 @@
                 burger.setAttribute('aria-expanded', isOpen);
             });
         }
-        // Tutorial Logic
+
+        // tutorial logic
         let currentStep = 0;
         const overlay = document.getElementById('tutorial-overlay');
         const box = document.getElementById('tutorial-box');
@@ -211,8 +214,13 @@
             },
             {
                 target: "#spin-btn",
-                title: "Start Playing!",
-                text: "Once you've placed your bet, click the SPIN button to spin the wheel. Good luck!"
+                title: "Spin the wheel!",
+                text: "Once you've placed your bet, click the SPIN button to spin the wheel."
+            },
+            {
+                target: null,
+                title: "Good Luck!",
+                text: "That's the end of the tutorial. Good luck and have fun playing Roulette!"
             }
         ];
 

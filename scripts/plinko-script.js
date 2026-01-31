@@ -19,14 +19,14 @@ const render = Render.create({
 Render.run(render);
 Runner.run(Runner.create(), engine);
 
-// Walls
+// walls
 World.add(world, [
     Bodies.rectangle(width / 2, height, width, 20, { isStatic: true }),
     Bodies.rectangle(0, height / 2, 20, height, { isStatic: true }),
     Bodies.rectangle(width, height / 2, 20, height, { isStatic: true })
 ]);
 
-// Pins
+// pins
 const pinRadius = 5, rows = 16;
 const pinSpacingY = (height - 200) / (rows - 1), pinSpacingX = width / rows;
 for (let row = 0; row < rows; row++) {
@@ -39,7 +39,7 @@ for (let row = 0; row < rows; row++) {
     }
 }
 
-// Slots & multipliers
+// slots & multipliers
 const slotWidth = width / (rows + 1), slotHeight = 60;
 const slots = [], slotColors = [], slotMultipliers = [];
 const multipliers = [0.5, 0.5, 1, 2, 5, 10, 15, 30, 50, 30, 15, 10, 5, 2, 1, 0.5, 0.5];
@@ -60,7 +60,7 @@ for (let i = 0; i <= rows; i++) {
     World.add(world, slot);
 }
 
-// Draw multipliers
+// draw multipliers
 const ctx = render.canvas.getContext("2d");
 Events.on(render, "afterRender", () => {
     ctx.font = "bold 14px Arial";
@@ -73,7 +73,7 @@ Events.on(render, "afterRender", () => {
     });
 });
 
-// Ball drop & collision
+// ball drop & collision
 const balls = [];
 function highlightSlot(slot) {
     const orig = slot.color;
@@ -103,10 +103,10 @@ Events.on(engine, "collisionStart", event => {
     });
 });
 
-// Win history
+// win history
 const winHistory = [];
 function addWinToHistory(multiplier, winAmount) {
-    // Determine class based on multiplier
+    // determine class based on multiplier
     let cls = "";
     if (multiplier >= 100) cls = "win-x100";
     else if (multiplier >= 75) cls = "win-x75";
@@ -129,7 +129,7 @@ function addWinToHistory(multiplier, winAmount) {
     }
 }
 
-// Bet & drop logic
+// bet & drop logic
 const betAmountInput = document.getElementById("bet-amount");
 const startGameBtn = document.getElementById("start-game");
 function validateBetInput() {
@@ -164,7 +164,7 @@ startGameBtn.addEventListener("click", () => {
     }
     setTokens(getTokens() - betAmount);
     updateTokenDisplay();
-    // Drop ball mainly from center (±10% width)
+    // drop ball mainly from center (±10% width)
     const center = width / 2;
     const dropRadius = width * 0.10;
     const randomX = center + (Math.random() - 0.5) * 2 * dropRadius;
@@ -178,27 +178,27 @@ startGameBtn.addEventListener("click", () => {
     World.add(world, ball);
 });
 
-// Responsive canvas resizing
+// responsive canvas resizing
 function resizePlinkoCanvas() {
     const container = document.getElementById("plinko-canvas");
     if (!container) return;
     const canvas = render.canvas;
     const baseWidth = 600, baseHeight = 700;
 
-    // Available space
+    // available space
     const availWidth = Math.min(window.innerWidth, container.parentElement.offsetWidth || window.innerWidth);
     const availHeight = window.innerHeight - container.getBoundingClientRect().top - 30;
 
-    // Calculate scaling factor to fit the area within width and height, but never larger than original
+    // calculate scaling factor to fit the area within width and height, but never larger than original
     const scale = Math.min(availWidth / baseWidth, availHeight / baseHeight, 1);
 
-    // Set canvas scaling
+    // set canvas scaling
     canvas.style.transform = `scale(${scale})`;
     canvas.style.transformOrigin = "top center";
     canvas.style.width = baseWidth + "px";
     canvas.style.height = baseHeight + "px";
 
-    // Container always has the native canvas size (for centering with flex)
+    // container always has the native canvas size (for centering with flex)
     container.style.width = baseWidth + "px";
     container.style.height = baseHeight + "px";
     container.style.display = "flex";
@@ -209,3 +209,16 @@ function resizePlinkoCanvas() {
 }
 window.addEventListener("resize", resizePlinkoCanvas);
 resizePlinkoCanvas();
+
+// --- PRESET BUTTONS LOGIC ---
+document.querySelectorAll('.preset-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        let value = btn.getAttribute('data-value');
+        if (value === 'max') {
+            value = Math.floor(getTokens()/2); // max is half of current tokens
+        }
+        document.getElementById('bet-amount').value = value;
+        const event = new Event('input', { bubbles: true });
+        document.getElementById('bet-amount').dispatchEvent(event);
+    });
+});

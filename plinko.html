@@ -21,7 +21,7 @@
         </div>
 
         <ul id="nav-links" class="nav-links">
-            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="index.html">Home</a></li>
             <li><a href="coinflip.html" class="notUnlocked">Coinflip</a></li>
             <li><a href="roulette.html">Roulette</a></li>
             <li><a href="blackjack.html">Blackjack</a></li>
@@ -79,7 +79,7 @@
     <script>
         updateTokenDisplay();
 
-        // Burger Menu Logic
+        // navbar logic
         const nav = document.querySelector('nav');
         const burger = document.getElementById('menu-toggle');
         if (burger) {
@@ -89,20 +89,7 @@
             });
         }
 
-        // Preset Buttons Logic
-        document.querySelectorAll('.preset-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                let value = btn.getAttribute('data-value');
-                if (value === 'max') {
-                    value = getTokens();
-                }
-                document.getElementById('bet-amount').value = value;
-                const event = new Event('input', { bubbles: true });
-                document.getElementById('bet-amount').dispatchEvent(event);
-            });
-        });
-
-        // Tutorial Logic
+        // tutorial logic
         let currentStep = 0;
         const overlay = document.getElementById('tutorial-overlay');
         const box = document.getElementById('tutorial-box');
@@ -128,19 +115,24 @@
                 text: "Alternatively, use these buttons to quickly set your bet amount (Min, Max, etc.)."
             },
             {
-                target: "#plinko-canvas",
-                title: "The Game Board",
-                text: "The ball drops from the top. The edges pay less, while the center pays the most."
-            },
-            {
                 target: ".win-history",
                 title: "Win History",
                 text: "Track your last 15 results here. It shows the multiplier hit and the tokens won."
             },
             {
+                target: "#plinko-canvas",
+                title: "The Game Board",
+                text: "The ball drops from the top. The edges pay less, while the center pays the most."
+            },
+            {
                 target: "#start-game",
-                title: "Start Playing!",
-                text: "When you are ready, click 'Start Game'. Good luck!"
+                title: "Drop the Ball",
+                text: "Click this button to drop the ball and start the game!"
+            },
+            {
+                target: null,
+                title: "Good Luck!",
+                text: "That's the end of the tutorial. Good luck and have fun playing Plinko!"
             }
         ];
 

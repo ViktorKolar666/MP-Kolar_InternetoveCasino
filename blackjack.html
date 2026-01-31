@@ -35,7 +35,7 @@
     <div class="game-container">
         <div class="blackjack-board">
             
-            <div class="hand-section">
+            <div id="dealer-hand" class="hand-section">
                 <h2>Dealer <span id="dealer-score" class="score-badge">0</span></h2>
                 <div id="dealer-cards" class="cards-container">
                     <div class="card-placeholder"></div>
@@ -47,7 +47,7 @@
                 <div id="game-message" class="game-message">Place your bet to start</div>
             </div>
 
-            <div class="hand-section">
+            <div id="player-hand" class="hand-section">
                 <h2>You <span id="player-score" class="score-badge">0</span></h2>
                 <div id="player-cards" class="cards-container">
                     <div class="card-placeholder"></div>
@@ -57,6 +57,9 @@
         </div>
 
         <div class="controls-section">
+            <div class="popup" onclick="startTutorial()">
+                <p><img src="images/icons/tutorial.png" alt="Question Icon" class="icon-question">Tutorial</p>
+            </div>
             
             <div id="betting-controls" class="betting-panel">
                 <label>Bet Amount:</label>
@@ -80,12 +83,25 @@
         </div>
     </div>
 
+    <div id="tutorial-overlay" class="tutorial-overlay">
+        <div id="highlight-box" class="highlight-box"></div>
+        <div id="tutorial-box" class="tutorial-box">
+            <h3 id="tut-title">Welcome!</h3>
+            <p id="tut-text">Tutorial text...</p>
+            <div class="tut-buttons">
+                <button onclick="endTutorial()" class="tut-btn-skip">Skip</button>
+                <button onclick="nextStep()" class="tut-btn-next">Next</button>
+            </div>
+        </div>
+    </div>
+
     <script src="scripts/currency.js"></script>
     <script src="scripts/blackjack-script.js"></script>
     
     <script>
-        // Navbar Logic
         updateTokenDisplay();
+
+        // navbar logic
         const nav = document.querySelector('nav');
         const burger = document.getElementById('menu-toggle');
         if (burger) {
@@ -94,6 +110,172 @@
                 burger.setAttribute('aria-expanded', isOpen);
             });
         }
+
+        //tutorial logic
+        let currentStep = 0;
+        const overlay = document.getElementById('tutorial-overlay');
+        const box = document.getElementById('tutorial-box');
+        const highlight = document.getElementById('highlight-box');
+        const title = document.getElementById('tut-title');
+        const text = document.getElementById('tut-text');
+        const nextBtn = document.querySelector('.tut-btn-next');
+
+        const steps = [
+            {
+                target: null,
+                title: "Welcome to Blackjack!",
+                text: "The goal is to place your bets and try to get a hand value as close to 21 as possible without going over."
+            },
+            {
+                target: "#bet-amount",
+                title: "Place Your Bet",
+                text: "Enter the amount of tokens you want to wager here. The maximum bet is half your total tokens."
+            },
+            {
+                target: ".bet-presets",
+                title: "Bet Presets",
+                text: "Use these buttons to quickly set your bet amount to common values."
+            },
+            {
+                target: ".blackjack-board",
+                title: "Playing the Game",
+                text: "Here's where the action happens! Your and the dealer's cards will be displayed here.You can also see your current hand values."
+            },
+            {
+                target: "#dealer-hand",
+                title: "Dealer's Hand",
+                text: "The dealer's hand is displayed here. The dealer must hit until their hand value is at least 17."
+            },
+            {
+                target: "#player-hand",
+                title: "Your Hand",
+                text: "Your hand is displayed here. You can choose to Hit to receive another card or Stand to keep your current hand."
+            },
+            {
+                target: "#deal-btn",
+                title: "Deal the Cards",
+                text: "Click this button to deal the cards and start the round. The dealer and you will each receive two cards, but one of the dealer's cards will be hidden."
+            },
+            {
+                target: null,
+                title: "Good Luck!",
+                text: "That's the end of the tutorial. Good luck and have fun playing Blackjack!"
+            }
+        ];
+
+        function preventDefault(e) {
+            e.preventDefault();
+        }
+
+        function disableUserScroll() {
+            window.addEventListener('wheel', preventDefault, { passive: false });
+            window.addEventListener('touchmove', preventDefault, { passive: false });
+            window.addEventListener('keydown', preventDefaultForScrollKeys, { passive: false });
+        }
+
+        function enableUserScroll() {
+            window.removeEventListener('wheel', preventDefault, { passive: false });
+            window.removeEventListener('touchmove', preventDefault, { passive: false });
+            window.removeEventListener('keydown', preventDefaultForScrollKeys, { passive: false });
+        }
+
+        function preventDefaultForScrollKeys(e) {
+            const keys = {37: 1, 38: 1, 39: 1, 40: 1, 32: 1, 33: 1, 34: 1, 35: 1, 36: 1};
+            if (keys[e.keyCode]) {
+                preventDefault(e);
+                return false;
+            }
+        }
+
+        function startTutorial() {
+            currentStep = 0;
+            overlay.style.display = "block";
+            disableUserScroll();
+            showStep(currentStep);
+        }
+
+        function endTutorial() {
+            overlay.style.display = "none";
+            enableUserScroll();
+            currentTargetEl = null;
+        }
+
+        function nextStep() {
+            currentStep++;
+            if (currentStep >= steps.length) {
+                endTutorial();
+            } else {
+                showStep(currentStep);
+            }
+        }
+
+        let currentTargetEl = null;
+
+        function updateHighlightPosition() {
+            if (!currentTargetEl) return;
+            
+            const rect = currentTargetEl.getBoundingClientRect();
+            
+            highlight.style.width = (rect.width + 10) + "px";
+            highlight.style.height = (rect.height + 10) + "px";
+            highlight.style.top = (rect.top - 5) + "px";
+            highlight.style.left = (rect.left - 5) + "px";
+
+            box.style.position = 'fixed';
+            box.style.transform = "translateX(-50%)";
+            box.style.left = "50%";
+            
+            const boxHeight = box.offsetHeight || 200; 
+            const spaceAbove = rect.top;
+            const spaceBelow = window.innerHeight - rect.bottom;
+            
+            if (spaceBelow > boxHeight + 20) {
+                box.style.top = (rect.bottom + 20) + "px";
+            } else if (spaceAbove > boxHeight + 20) {
+                box.style.top = (rect.top - boxHeight - 20) + "px";
+            } else {
+                box.style.top = "50%";
+                box.style.transform = "translate(-50%, -50%)";
+            }
+        }
+
+        function showStep(index) {
+            const step = steps[index];
+            title.innerText = step.title;
+            text.innerText = step.text;
+            nextBtn.innerText = (index === steps.length - 1) ? "Play!" : "Next";
+
+            if (step.target) {
+                const targetEl = document.querySelector(step.target);
+                if (targetEl) {
+                    currentTargetEl = targetEl;
+                    highlight.style.display = "block";
+                    targetEl.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+                    setTimeout(() => {
+                        updateHighlightPosition();
+                    }, 500); 
+                    updateHighlightPosition();
+                }
+            } else {
+                currentTargetEl = null;
+                highlight.style.display = "none";
+                box.style.position = 'fixed';
+                box.style.top = "50%";
+                box.style.left = "50%";
+                box.style.transform = "translate(-50%, -50%)";
+            }
+        }
+
+        window.addEventListener('resize', () => {
+            if (overlay.style.display === "block") {
+                if(currentTargetEl) {
+                    currentTargetEl.scrollIntoView({ block: "center", inline: "center" });
+                    setTimeout(updateHighlightPosition, 100);
+                } else {
+                    updateHighlightPosition();
+                }
+            }
+        });
     </script>
 </body>
 </html>

@@ -1,15 +1,15 @@
 // WHEEL CONFIGURATION 
-// European roulette number sequence (Clockwise)
+// European roulette number sequence (clockwise)
 const rouletteNumbers = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
 
 // Function to determine segment color
 function getSegmentColor(number) {
-    if (number === 0) return '#2ECC71'; // Green
+    if (number === 0) return '#2ECC71'; // green
     const redNumbers = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36];
-    return redNumbers.includes(number) ? '#e74c3c' : '#0A1914'; // Red vs Dark
+    return redNumbers.includes(number) ? '#e74c3c' : '#0A1914'; // red vs dark
 }
 
-// Generate segments for Winwheel
+// generate segments for Winwheel
 const segments = rouletteNumbers.map(num => ({
     'fillStyle': getSegmentColor(num),
     'text': num.toString(),
@@ -17,63 +17,63 @@ const segments = rouletteNumbers.map(num => ({
     'textFontSize': 16
 }));
 
-// Initialize Winwheel
+// initialize Winwheel
 let theWheel = new Winwheel({
     'numSegments': 37,
-    'outerRadius': 190, // Matches canvas size
+    'outerRadius': 190, // matches canvas size
     'textFontSize': 18,
     'textFontFamily': 'Pixelify Sans',
     'segments': segments,
     'lineWidth': 2,
-    'strokeStyle': '#D9F2EB', // Divider lines color
-    'innerRadius': 70, // Donut hole
+    'strokeStyle': '#D9F2EB', // divider lines color
+    'innerRadius': 70, // donut hole
     'animation': {
         'type': 'spinToStop',
-        'duration': 4, // Spin time in seconds
+        'duration': 4, // spin time in seconds
         'spins': 8,
         'callbackFinished': alertPrize,
-        'easing': 'Power4.out' // Requires TweenMax
+        'easing': 'Power4.out' // requires TweenMax
     }
 });
 
-// BETTING LOGIC
-let currentBetSelection = null; // Stores what the user clicked (e.g., 'red', '0', '17')
+// --- BETTING LOGIC ---
+let currentBetSelection = null; // stores what the user clicked (e.g., 'red', '0', '17')
 
-// Function called when user clicks on the board
+// function called when user clicks on the board
 window.selectBet = function(selection) {
-    // 1. Remove highlight from all cells
+    // 1. remove highlight from all cells
     document.querySelectorAll('.board-cell').forEach(el => el.classList.remove('selected'));
     
-    // 2. Set new selection
+    // 2. set new selection
     currentBetSelection = selection;
     
-    // 3. Add highlight to the clicked element
+    // 3. add highlight to the clicked element
     if (event && event.currentTarget) {
         event.currentTarget.classList.add('selected');
     }
 
-    // 4. Update UI text
+    // 4. update UI text
     document.getElementById('selected-bet-text').innerText = selection.toUpperCase();
 }
 
-// GAME LOGIC
+// --- GAME LOGIC ---
 const spinBtn = document.getElementById('spin-btn');
 const messageArea = document.getElementById('message-area');
 const betInput = document.getElementById('bet-amount');
 
 spinBtn.addEventListener('click', () => {
-    // 1. Get raw value
+    // 1. get raw value
     let rawValue = parseFloat(betInput.value);
     
-    // 2. Round down to nearest integer (Floor)
+    // 2. round down to nearest integer (floor)
     const betAmount = Math.floor(rawValue);
 
-    // 3. Update the input field visually so user sees the rounded number
+    // 3. update the input field visually so user sees the rounded number
     if (!isNaN(betAmount)) {
         betInput.value = betAmount;
     }
     
-    // Validation
+    // validation
     if (!currentBetSelection) {
         messageArea.innerText = "Please select a bet on the table!";
         messageArea.style.color = "#ffd700";
@@ -84,20 +84,15 @@ spinBtn.addEventListener('click', () => {
         messageArea.style.color = "#ffd700";
         return;
     }
-    if (betAmount > getTokens() / 2) {
-        messageArea.innerText = "Bet cannot exceed half of your current tokens!";
-        messageArea.style.color = "red";
-        return;
-    }
 
-    // Deduct tokens immediately
+    // deduct tokens immediately
     setTokens(getTokens() - betAmount);
     updateTokenDisplay();
     
     messageArea.innerText = "Spinning...";
     messageArea.style.color = "#ffd700";
     
-    // Disable button and start spin
+    // disable button and start spin
     spinBtn.disabled = true;
     theWheel.stopAnimation(false);
     theWheel.rotationAngle = 0;
@@ -105,15 +100,15 @@ spinBtn.addEventListener('click', () => {
     theWheel.startAnimation();
 });
 
-// Function called when spin finishes
+// function called when spin finishes
 function alertPrize(indicatedSegment) {
     const winningNumber = parseInt(indicatedSegment.text);
-    // Re-read value (it is already rounded from the click event)
+    // re-read value (it is already rounded from the click event)
     const betAmount = parseInt(betInput.value); 
     let winAmount = 0;
     let won = false;
 
-    // Check Win Condition
+    // check win condition
     if (currentBetSelection === 'red') {
         const redNumbers = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36];
         if (redNumbers.includes(winningNumber)) won = true;
@@ -121,7 +116,7 @@ function alertPrize(indicatedSegment) {
     } 
     else if (currentBetSelection === 'black') {
         const redNumbers = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36];
-        // Note: 0 is neither red nor black
+        // 0 is neither red nor black
         if (!redNumbers.includes(winningNumber) && winningNumber !== 0) won = true;
         if (won) winAmount = betAmount * 2;
     }
@@ -134,14 +129,14 @@ function alertPrize(indicatedSegment) {
         if (won) winAmount = betAmount * 2;
     }
     else {
-        // Specific Number Bet
+        // specific number bet
         if (parseInt(currentBetSelection) === winningNumber) {
             won = true;
-            winAmount = betAmount * 36; // Standard payout 35:1 + original bet
+            winAmount = betAmount * 36; // standard payout 35:1 + original bet
         }
     }
 
-    // Handle Result
+    // handle result
     if (won) {
         setTokens(getTokens() + winAmount);
         updateTokenDisplay();
@@ -155,20 +150,20 @@ function alertPrize(indicatedSegment) {
     spinBtn.disabled = false;
 }
 
-// Initial draw of the wheel
+// initial draw of the wheel
 theWheel.draw();
 
-// PRESET BUTTONS LOGIC
+// --- PRESET BUTTONS LOGIC ---
 document.querySelectorAll('.preset-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         let value = btn.getAttribute('data-value');
         
-        // Handle 'max' button click
+        // handle 'max' button click
         if (value === 'max') {
-            value = Math.floor(getTokens()/2); // Max is half of current tokens
+            value = Math.floor(getTokens());
         }
         
-        // Set the value to the input field
+        // set the value to the input field
         document.getElementById('bet-amount').value = value;
     });
 });

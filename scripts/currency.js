@@ -1,5 +1,7 @@
 const DEFAULT_TOKENS = 100;
 const TOKEN_KEY = "casino_tokens";
+// Only Coinflip and Home are unlocked by default
+const DEFAULT_UNLOCKED = ['index.html', 'coinflip.html'];
 
 // token initialization when first visiting site
 function initTokens() {
@@ -21,7 +23,7 @@ function setTokens(amount) {
 // update token display on the page
 function updateTokenDisplay(selector = "#currency") {
     const el = document.querySelector(selector);
-    if (el) el.textContent = getTokens().toFixed(1) + " tokens";
+    if (el) el.textContent = getTokens().toFixed(0);
 }
 
 // run on page load
@@ -36,4 +38,76 @@ document.addEventListener("DOMContentLoaded", () => {
             updateTokenDisplay();
         });
     }
+});
+
+// --- GAME UNLOCKING ---
+function getUnlockedGames() {
+    const stored = localStorage.getItem("unlockedGames");
+    if (!stored) {
+        localStorage.setItem('unlockedGames', JSON.stringify(DEFAULT_UNLOCKED));
+        return DEFAULT_UNLOCKED;
+    }
+    return JSON.parse(stored);
+}
+
+function isGameUnlocked(gameFile) {
+    const unlocked = getUnlockedGames();
+    return unlocked.includes(gameFile);
+}
+
+function buyGame(gameFileName, cost) {
+    if (isGameUnlocked(gameFileName)) {
+        alert("You already have this game unlocked!");
+        return;
+    }
+
+    const currentTokens = getTokens();
+    if (currentTokens >= cost) {
+        setTokens(currentTokens - cost);
+        
+        const unlocked = getUnlockedGames();
+        unlocked.push(gameFileName);
+        localStorage.setItem('unlockedGames', JSON.stringify(unlocked));
+        
+        updateNavLocks();
+        updateTokenDisplay();
+        
+        // update main page cards if function exists
+        if (typeof updateMainUI === 'function') updateMainUI();
+
+        alert(`Successfully purchased ${gameFileName.replace('.html', '').toUpperCase()}!`);
+    } else {
+        alert(`You don't have enough tokens! Cost: ${cost}, You have: ${currentTokens}`);
+    }
+}
+
+// update navigation links based on unlocked games
+function updateNavLocks() {
+    const unlocked = getUnlockedGames();
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        // if the game is unlocked, remove the lock
+        if (unlocked.includes(href)) {
+            link.classList.remove('notUnlocked');
+        } else {
+            // else, add the lock
+            link.classList.add('notUnlocked');
+        }
+    });
+}
+
+// --- PROGRESS RESET ---
+function resetProgress() {
+    if (confirm("DO YOU REALLY WANT TO RESET THE GAME? All purchased games and tokens will be lost!")) {
+        localStorage.clear();
+        location.reload();
+    }
+}
+
+// --- INITIALIZATION ---
+document.addEventListener('DOMContentLoaded', () => {
+    updateTokenDisplay();
+    updateNavLocks();
 });

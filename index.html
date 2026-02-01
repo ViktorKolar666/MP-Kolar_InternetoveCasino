@@ -1,75 +1,122 @@
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Casino simulator</title>
-        <link rel="stylesheet" href="styles/index-style.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
-        <link rel="icon" href="images/icons/icon.png">
-    </head>
-    <body>
-        <nav>
-            <div class="nav-top">
-                <div class="currency-display">Tokens: <span id="currency"></span></div>
-                <button id="menu-toggle" class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
-                    <span></span><span></span><span></span>
-                </button>
-            </div>
-            <ul id="nav-links" class="nav-links">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="coinflip.html" >Coinflip</a></li>
-                <li><a href="roulette.html">Roulette</a></li>
-                <li><a href="blackjack.html">Blackjack</a></li>
-                <li><a href="plinko.html">Plinko</a></li>
-            </ul>
-        </nav>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casino simulator</title>
+    <link rel="stylesheet" href="styles/index-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/icons/icon.png">
+</head>
+<body>
+    <nav>
+        <div class="nav-top">
+            <div class="currency-display">Tokens: <span id="currency"></span> tkn</div>
+            <button id="menu-toggle" class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <ul id="nav-links" class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="coinflip.html">Coinflip</a></li>
+            <li><a href="roulette.html" class="notUnlocked">Roulette</a></li>
+            <li><a href="blackjack.html" class="notUnlocked">Blackjack</a></li>
+            <li><a href="plinko.html" class="notUnlocked">Plinko</a></li>
+        </ul>
+    </nav>
 
-        <header>
-            <h1>Casino simulator</h1>
-        </header>
+    <header>
+        <h1>Casino simulator</h1>
+    </header>
 
-        <div class="game-cards">
-            <div class="card">
-                <a href="coinflip.html">Coinflip</a>
-                <p class="description">50/50 chance to double your tokens!</p>
-            </div>
-            <div class="card">
-                <a href="roulette.html">Roulette</a>
-                <p class="description">Spin the wheel and test your luck!</p>
-            </div>
-            <div class="card">
-                <a href="blackjack.html">Blackjack</a>
-                <p class="description">Try to beat the dealer!</p>
-            </div>
-            <div class="card">
-                <a href="plinko.html">Plinko</a>
-                <p class="description">Drop balls and win prizes!</p>
-            </div>
+    <div class="game-cards">
+
+        <div class="card" data-game="coinflip.html" data-price="0">
+            <a href="coinflip.html">Coinflip</a>
+            <p class="description">50/50 chance to double your tokens!</p>
         </div>
 
-        <script src="scripts/currency.js"></script>
+        <div class="card" data-game="roulette.html" data-price="500">
+            <a href="roulette.html">Roulette</a>
+            <p class="description">Spin the wheel and test your luck!</p>
+            <button class="unlock-btn" onclick="triggerBuy('roulette.html', 500)">Unlock: 500 tkn</button>
+        </div>
 
-        <script>
-            updateTokenDisplay();
-        </script>
+        <div class="card" data-game="blackjack.html" data-price="1000">
+            <a href="blackjack.html">Blackjack</a>
+            <p class="description">Try to beat the dealer!</p>
+            <button class="unlock-btn" onclick="triggerBuy('blackjack.html', 1000)">Unlock: 1000 tkn</button>
+        </div>
 
-        <button id="reset-tokens-btn" class="reset-tokens-btn">Reset tokens</button>
-        <script>
-            const nav = document.querySelector('nav');
-            const burger = document.getElementById('menu-toggle');
-            if (burger) {
-                burger.addEventListener('click', () => {
-                    const isOpen = nav.classList.toggle('open');
-                    burger.setAttribute('aria-expanded', isOpen);
-                });
-            }
-            
-            document.getElementById("reset-tokens-btn").addEventListener("click", () => {
-                setTokens(100);
-                updateTokenDisplay();
+        <div class="card" data-game="plinko.html" data-price="5000">
+            <a href="plinko.html">Plinko</a>
+            <p class="description">Drop balls and win prizes!</p>
+            <button class="unlock-btn" onclick="triggerBuy('plinko.html', 5000)">Unlock: 5000 tkn</button>
+        </div>
+
+    </div>
+
+    <button id="reset-all-btn" class="reset-all-btn">Reset Progress</button>
+
+    <script src="scripts/currency.js"></script>
+
+    <script>
+        updateTokenDisplay();
+
+        const nav = document.querySelector('nav');
+        const burger = document.getElementById('menu-toggle');
+        if (burger) {
+            burger.addEventListener('click', () => {
+                const isOpen = nav.classList.toggle('open');
+                burger.setAttribute('aria-expanded', isOpen);
             });
-        </script>
-    </body>
+        }
+        
+        // --- MAIN PAGE LOGIC ---
+        
+        // function to update card status - if locked/unlocked
+        function updateCardsStatus() {
+            const cards = document.querySelectorAll('.card[data-price]');
+            
+            cards.forEach(card => {
+                const gameFile = card.getAttribute('data-game');
+                const price = parseInt(card.getAttribute('data-price'));
+                
+                // iheck if game is unlocked using currency.js function
+                const isUnlocked = isGameUnlocked(gameFile);
+                
+                // if price is 0 or game is in unlocked list
+                if (price === 0 || isUnlocked) {
+                    card.classList.remove('locked');
+                } else {
+                    card.classList.add('locked');
+                }
+            });
+        }
+
+        // wrapper function to buy game and refresh UI immediately
+        function triggerBuy(game, price) {
+            buyGame(game, price); // from currency.js
+            updateCardsStatus();  // refresh visuals
+        }
+
+        // expose update function to window for currency.js to call
+        window.updateMainUI = updateCardsStatus;
+
+        // run on page load
+        document.addEventListener('DOMContentLoaded', updateCardsStatus);
+
+        // reset button logic
+        document.getElementById("reset-all-btn").addEventListener("click", () => {
+            if(typeof resetProgress === 'function') {
+                resetProgress();
+            } else {
+                localStorage.clear();
+                location.reload();
+            }
+        });
+    </script>
+</body>
 </html>

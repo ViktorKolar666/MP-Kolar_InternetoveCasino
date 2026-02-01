@@ -98,8 +98,12 @@ nav {
 
 .notUnlocked {
     background-image: url("../images/icons/lock.png");
-    pointer-events: none; opacity: 0.5; filter: blur(1px);
-    background-size: 60px 60px; background-repeat: no-repeat; background-position: center;
+    pointer-events: none;
+    opacity: 0.5;
+    filter: blur(1px);
+    background-size: 60px 60px;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 /* --- COINFLIP LAYOUT --- */

@@ -40,7 +40,7 @@ p {
     text-align: center;
 }
 
-/* NAVBAR */
+/* --- NAVBAR --- */
 nav {
     background-color: #0A1914;
     padding: 10px 20px;
@@ -104,19 +104,18 @@ nav {
     color: #0A1914;
 }
 
-/* Nav Lock Icon Style */
+/* nav lock icon style */
 .notUnlocked {
     background-image: url("../images/icons/lock.png");
     pointer-events: none;
-    opacity: 0.6;
-    filter: blur(0.5px) grayscale(50%);
-    background-size: 20px 20px;
+    opacity: 0.5;
+    filter: blur(1px);
+    background-size: 60px 60px;
     background-repeat: no-repeat;
-    background-position: center left 5px;
-    padding-left: 30px !important; 
+    background-position: center;
 }
 
-/* BURGER MENU */
+/* --- BURGER MENU --- */
 .burger {
     display: none;
     flex-direction: column;
@@ -137,7 +136,7 @@ nav {
     border-radius: 2px;
 }
 
-/* RESPONSIVENESS */
+/* --- RESPONSIVENESS --- */
 @media (max-width: 900px) {
     nav {
         flex-direction: column;

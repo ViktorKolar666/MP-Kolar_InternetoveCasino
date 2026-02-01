@@ -81,18 +81,51 @@ function buyGame(gameFileName, cost) {
     }
 }
 
+// // update navigation links based on unlocked games
+// function updateNavLocks() {
+// const unlocked = getUnlockedGames();
+// const navLinks = document.querySelectorAll('.nav-links a');
+
+// navLinks.forEach(link => {
+// const href = link.getAttribute('href');
+// // if the game is unlocked, remove the lock
+// if (unlocked.includes(href)) {
+//     link.classList.remove('notUnlocked');
+// } else {
+//     // else, add the lock
+//     link.classList.add('notUnlocked');
+// }
+// });
+// }
+
 // update navigation links based on unlocked games
 function updateNavLocks() {
     const unlocked = getUnlockedGames();
     const navLinks = document.querySelectorAll('.nav-links a');
 
     navLinks.forEach(link => {
-        const href = link.getAttribute('href');
-        // if the game is unlocked, remove the lock
+        let href = link.getAttribute('href');
+        
+        // --- FIX FOR HOSTING ---
+        // Remove leading slash if present (e.g., "/coinflip" -> "coinflip")
+        if (href.startsWith('/')) {
+            href = href.substring(1);
+        }
+        
+        // If removing the slash leaves an empty string (was just "/"), it's index.html
+        if (href === '') {
+            href = 'index.html';
+        }
+        
+        // If the .html extension is missing, add it (e.g., "coinflip" -> "coinflip.html")
+        if (href.length > 0 && !href.endsWith('.html')) {
+            href += '.html';
+        }
+
+        // Now compare the corrected name
         if (unlocked.includes(href)) {
             link.classList.remove('notUnlocked');
         } else {
-            // else, add the lock
             link.classList.add('notUnlocked');
         }
     });

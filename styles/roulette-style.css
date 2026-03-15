@@ -1,6 +1,6 @@
 /* --- GLOBAL RESET & FONTS --- */
-.bree-serif-regular {
-    font-family: "Bree Serif", serif !important;
+.jersey-10-regular {
+    font-family: "Jersey 10", sans-serif !important;
     font-weight: 400;
     font-style: normal;
 }
@@ -21,7 +21,7 @@ html, body {
 body {
     background-color: #0A1914;
     color: #D9F2EB;
-    font-family: "Pixelify Sans", Arial, sans-serif;
+    font-family: "Jersey 10", Arial, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,13 +31,13 @@ body {
 h1 {
     color: #2ECC71;
     text-align: center;
-    font-family: "Pixelify Sans", Arial, sans-serif;
+    font-family: "Jersey 10", Arial, sans-serif;
     margin-top: 40px;
 }
 
 p {
     color: #D9F2EB;
-    font-family: "Pixelify Sans", Arial, sans-serif;
+    font-family: "Jersey 10", Arial, sans-serif;
     text-align: center;
 }
 
@@ -72,9 +72,9 @@ nav {
 
 .currency-display {
     color: #D9F2EB;
-    font-family: "Pixelify Sans", Arial, sans-serif;
-    font-size: 1.1em;
-    font-weight: bold;
+    font-family: "Jersey 10", Arial, sans-serif;
+    font-size: 1.5em;
+    font-weight: normal;
     white-space: nowrap;
 }
 
@@ -86,6 +86,7 @@ nav {
     display: flex;
     gap: 20px;
     align-items: center;
+    font-size: 1.2em;
 }
 
 .nav-links li {
@@ -96,7 +97,7 @@ nav {
     text-decoration: none;
     color: #2ECC71;
     padding: 10px 20px;
-    font-family: "Pixelify Sans", Arial, sans-serif;
+    font-family: "Jersey 10", Arial, sans-serif;
     transition: background-color 0.3s, color 0.3s;
     border-radius: 5px;
 }
@@ -205,12 +206,12 @@ nav {
 }
 .button {
     background-color: #2ECC71; color: #0A1914; border: none; padding: 10px 30px;
-    border-radius: 8px; font-weight: bold; cursor: pointer; font-family: inherit; font-size: 1.1em;
+    border-radius: 8px; font-weight: normal; cursor: pointer; font-family: inherit; font-size: 1.4em;
 }
 .button:hover { background-color: #1ABC9C; }
 .button:disabled { background-color: #555; cursor: not-allowed; }
 
-.message { width: 100%; text-align: center; font-weight: bold; min-height: 24px; color: #ffd700; margin-top: 5px;}
+.message { width: 100%; text-align: center; font-weight: normal; min-height: 24px; color: #ffd700; margin-top: 5px;}
 
 /* --- BET PRESET BUTTONS --- */
 .bet-presets {
@@ -227,8 +228,8 @@ nav {
     border: none;
     border-radius: 5px;
     padding: 8px 0;
-    font-family: "Pixelify Sans", Arial, sans-serif;
-    font-size: 0.9em;
+    font-family: "Jersey 10", Arial, sans-serif;
+    font-size: 1.2em;
     cursor: pointer;
     transition: background 0.2s;
 }
@@ -260,7 +261,7 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-weight: bold;
+    font-weight: normal;
     cursor: pointer;
     border: 2px solid transparent;
     border-radius: 4px;
@@ -381,11 +382,11 @@ nav {
     }
     
     /* adjust fonts & sizes for mobile */
-    h1 { font-size: 1.5em; margin-top: 20px; }
+    h1 { font-size: 1.5em; margin-top: 20px; font-weight: normal;}
     
-    .board-cell { width: 40px; height: 40px; font-size: 0.9em; }
+    .board-cell { width: 40px; height: 40px; font-size: 1em; }
     .zero { height: 128px; } /* 3*40 + 2*4 gap */
-    .wide { width: 70px; font-size: 0.8em; }
+    .wide { width: 70px; font-size: 1em; }
 
     /* further reduce wheel size */
     .wheel-wrapper { width: 280px; height: 280px; }
@@ -411,7 +412,8 @@ nav {
     width: 300px;
     max-width: 90%;
     color: #D9F2EB;
-    font-family: "Pixelify Sans", Arial, sans-serif;
+    font-family: "Jersey 10", Arial, sans-serif;
+    font-weight: normal;
     box-shadow: 0 0 20px rgba(46, 204, 113, 0.3);
     transition: top 0.3s ease, left 0.3s ease;
     z-index: 10002;
@@ -421,6 +423,7 @@ nav {
 .tutorial-box h3 { 
     margin-top: 0;
     color: #2ECC71;
+    font-weight: normal;
 }
 
 .tut-buttons {
@@ -436,8 +439,8 @@ nav {
     padding: 8px 20px;
     border-radius: 5px;
     cursor: pointer;
-    font-weight: bold;
-    font-family: "Pixelify Sans", Arial, sans-serif;
+    font-weight: normal;
+    font-family: "Jersey 10", Arial, sans-serif;
 }
 
 .tut-btn-skip {
@@ -447,7 +450,7 @@ nav {
     padding: 8px 15px;
     border-radius: 5px;
     cursor: pointer;
-    font-family: "Pixelify Sans", Arial, sans-serif;
+    font-family: "Jersey 10", Arial, sans-serif;
 }
 
 .tut-btn-next:hover { background: #1ABC9C; }

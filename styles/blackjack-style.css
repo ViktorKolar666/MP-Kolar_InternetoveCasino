@@ -1,11 +1,11 @@
 /* --- GLOBAL RESET & FONTS --- */
-.bree-serif-regular { font-family: "Bree Serif", serif !important; }
+.jersey-10-regular { font-family: "Jersey 10", sans-serif !important; font-weight: 400; font-style: normal; }
 *, *::before, *::after { box-sizing: border-box; }
 
 body {
     background-color: #0A1914;
     color: #D9F2EB;
-    font-family: "Pixelify Sans", Arial, sans-serif;
+    font-family: "Jersey 10", Arial, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,7 +16,7 @@ body {
 h1 {
     color: #2ECC71;
     margin-top: 20px;
-    font-family: "Pixelify Sans", sans-serif;
+    font-family: "Jersey 10", sans-serif;
 }
 
 h2 {
@@ -54,8 +54,8 @@ nav {
 
 .currency-display {
     color: #D9F2EB;
-    font-weight: bold;
-    font-size: 1.1em;
+    font-weight: normal;
+    font-size: 1.5em;
 }
 
 .nav-links {
@@ -64,6 +64,7 @@ nav {
     padding: 0;
     display: flex;
     gap: 20px;
+    font-size: 1.2em;
 }
 
 .nav-links a {
@@ -130,6 +131,10 @@ nav {
     flex-direction: column;
     align-items: center;
     min-height: 150px;
+    font-weight: normal;
+    h2{
+        font-weight: normal;
+    }
 }
 
 .cards-container {
@@ -152,7 +157,7 @@ nav {
     background-color: #0E2B24;
     padding: 0 15px;
     color: #ffd700;
-    font-weight: bold;
+    font-weight: normal;
     margin-top: -12px; /* Pull text up to the line */
     font-size: 1.1em;
 }
@@ -275,7 +280,8 @@ nav {
      padding: 8px 0;
      border-radius: 5px;
      cursor: pointer;
-     font-family: "Pixelify Sans", sans-serif;
+    font-family: "Jersey 10", sans-serif;
+    font-size: 1.2em;
 }
 
 .preset-btn:hover { 
@@ -291,15 +297,14 @@ nav {
 
 .action-btn {
     padding: 15px 40px;
-    font-size: 1.2em;
+    font-size: 1.4em;
     background:#2ECC71;
     color: #0A1914;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-family: "Pixelify Sans",
-    sans-serif;
-    font-weight: bold;
+    font-family: "Jersey 10", sans-serif;
+    font-weight: normal;
     min-width: 120px;
 }
 .action-btn:hover { 
@@ -372,7 +377,7 @@ nav {
     width: 300px;
     max-width: 90%;
     color: #D9F2EB;
-    font-family: "Pixelify Sans", Arial, sans-serif;
+    font-family: "Jersey 10", Arial, sans-serif;
     box-shadow: 0 0 20px rgba(46, 204, 113, 0.3);
     transition: top 0.3s ease, left 0.3s ease;
     z-index: 10002;
@@ -397,8 +402,8 @@ nav {
     padding: 8px 20px;
     border-radius: 5px;
     cursor: pointer;
-    font-weight: bold;
-    font-family: "Pixelify Sans", Arial, sans-serif;
+    font-weight: normal;
+    font-family: "Jersey 10", Arial, sans-serif;
 }
 
 .tut-btn-skip {
@@ -408,7 +413,7 @@ nav {
     padding: 8px 15px;
     border-radius: 5px;
     cursor: pointer;
-    font-family: "Pixelify Sans", Arial, sans-serif;
+    font-family: "Jersey 10", Arial, sans-serif;
 }
 
 .tut-btn-next:hover { background: #1ABC9C; }

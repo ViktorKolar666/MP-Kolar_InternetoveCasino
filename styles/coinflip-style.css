@@ -1,11 +1,11 @@
 /* --- GLOBAL RESET & FONTS --- */
-.bree-serif-regular { font-family: "Bree Serif", serif !important; }
+.jersey-10-regular { font-family: "Jersey 10", sans-serif !important; font-weight: 400; font-style: normal; }
 *, *::before, *::after { box-sizing: border-box; }
 
 body {
     background-color: #0A1914;
     color: #D9F2EB;
-    font-family: "Pixelify Sans", Arial, sans-serif;
+    font-family: "Jersey 10", Arial, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,7 +16,7 @@ body {
 h1 {
     color: #2ECC71;
     margin-top: 20px;
-    font-family: "Pixelify Sans", sans-serif;
+    font-family: "Jersey 10", sans-serif;
 }
 
 h2 {
@@ -54,8 +54,8 @@ nav {
 
 .currency-display {
     color: #D9F2EB;
-    font-weight: bold;
-    font-size: 1.1em;
+    font-weight: normal;
+    font-size: 1.5em;
 }
 
 .nav-links {
@@ -64,6 +64,7 @@ nav {
     padding: 0;
     display: flex;
     gap: 20px;
+    font-size: 1.2em;
 }
 
 .nav-links a {
@@ -173,7 +174,7 @@ nav {
 
 .message {
     font-size: 1.2em;
-    font-weight: bold;
+    font-weight: normal;
     color: #ffd700;
     min-height: 1.2em;
     text-align: center;
@@ -223,7 +224,8 @@ nav {
     padding: 8px 0;
     border-radius: 5px;
     cursor: pointer;
-    font-family: "Pixelify Sans", sans-serif;
+    font-family: "Jersey 10", sans-serif;
+    font-size: 1.2em;
 }
 
 .preset-btn:hover {
@@ -240,12 +242,12 @@ nav {
 .choice-btn {
     padding: 15px 0;
     width: 150px;
-    font-size: 1.2em;
-    font-weight: bold;
+    font-size: 1.4em;
+    font-weight: normal;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-family: "Pixelify Sans", sans-serif;
+    font-family: "Jersey 10", sans-serif;
     transition: transform 0.1s;
 }
 
@@ -322,7 +324,7 @@ nav {
     width: 300px;
     max-width: 90%;
     color: #D9F2EB;
-    font-family: "Pixelify Sans", Arial, sans-serif;
+    font-family: "Jersey 10", Arial, sans-serif;
     box-shadow: 0 0 20px rgba(46, 204, 113, 0.3);
     transition: top 0.3s ease, left 0.3s ease;
     z-index: 10002;
@@ -347,8 +349,8 @@ nav {
     padding: 8px 20px;
     border-radius: 5px;
     cursor: pointer;
-    font-weight: bold;
-    font-family: "Pixelify Sans", Arial, sans-serif;
+    font-weight: normal;
+    font-family: "Jersey 10", Arial, sans-serif;
 }
 
 .tut-btn-skip {
@@ -358,7 +360,7 @@ nav {
     padding: 8px 15px;
     border-radius: 5px;
     cursor: pointer;
-    font-family: "Pixelify Sans", Arial, sans-serif;
+    font-family: "Jersey 10", Arial, sans-serif;
 }
 
 .tut-btn-next:hover { background: #1ABC9C; }

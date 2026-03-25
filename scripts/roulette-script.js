@@ -4,9 +4,9 @@ const rouletteNumbers = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11,
 
 // Function to determine segment color
 function getSegmentColor(number) {
-    if (number === 0) return '#2ECC71'; // green
+    if (number === 0) return '#2ECC71';
     const redNumbers = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36];
-    return redNumbers.includes(number) ? '#e74c3c' : '#0A1914'; // red vs dark
+    return redNumbers.includes(number) ? '#e74c3c' : '#0A1914';
 }
 
 // generate segments for Winwheel

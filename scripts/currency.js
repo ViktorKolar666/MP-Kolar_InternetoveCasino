@@ -106,7 +106,6 @@ function updateNavLocks() {
     navLinks.forEach(link => {
         let href = link.getAttribute('href');
         
-        // --- FIX FOR HOSTING ---
         // Remove leading slash if present (e.g., "/coinflip" -> "coinflip")
         if (href.startsWith('/')) {
             href = href.substring(1);

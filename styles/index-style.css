@@ -5,9 +5,7 @@
     font-style: normal;
 }
 
-*, *::before, *::after {
-    box-sizing: border-box;
-}
+*, *::before, *::after {  box-sizing: border-box;}
 
 html, body {
     margin: 0;
@@ -145,6 +143,7 @@ nav {
         align-items: stretch;
         justify-content: flex-start;
     }
+
     .nav-top {
         position: static;
         transform: none;
@@ -153,7 +152,9 @@ nav {
         justify-content: space-between;
         margin-bottom: 5px;
     }
+
     .burger { display: flex; }
+
     .nav-links {
         display: none;
         flex-direction: column;
@@ -164,8 +165,14 @@ nav {
         border-radius: 8px;
         overflow: hidden;
     }
+
     nav.open .nav-links { display: flex; }
-    .nav-links li { width: 100%; display: block; }
+
+    .nav-links li {
+        width: 100%; 
+        display: block; 
+    }
+
     .nav-links a {
         display: block;
         padding: 15px;
@@ -173,13 +180,28 @@ nav {
         text-align: center;
         border-bottom: 1px solid rgba(46, 204, 113, 0.1);
     }
+
     .nav-links a:last-child { border-bottom: none; }
 }
 
 @media (max-width: 600px) {
-    .card { width: 100%; max-width: 350px; }
-    .reset-all-btn { right: 15px; bottom: 15px; font-size: 0.9em; }
-    h1 { font-size: 1.5em; margin-top: 20px; }
+    .card { 
+        width: 100%; 
+        max-width: 350px; 
+    }
+
+    h1 { 
+        font-size: 1.5em; 
+        margin-top: 20px; 
+    }
+
+    .reset-all-btn {
+        position: static !important; 
+        margin: 50px auto 30px auto !important; 
+        width: calc(100% - 40px) !important;
+        max-width: 350px !important;
+        display: block !important;
+    }
 }
 
 /* --- GAME CARDS --- */
@@ -277,14 +299,10 @@ nav {
 }
 
 /* show button when locked */
-.card.locked .unlock-btn {
-    display: block;
-}
+.card.locked .unlock-btn { display: block;}
 
 /* keep description hidden */
-.card.locked .description {
-    display: none;
-}
+.card.locked .description { display: none;}
 
 /* --- RESET BUTTON --- */
 .reset-all-btn {
@@ -305,6 +323,4 @@ nav {
     transition: background 0.2s;
 }
 
-.reset-all-btn:hover {
-    background: #c0392b;
-}
+.reset-all-btn:hover { background: #c0392b;}

@@ -1,5 +1,10 @@
 /* --- GLOBAL RESET & FONTS --- */
-.jersey-10-regular { font-family: "Jersey 10", sans-serif !important; font-weight: 400; font-style: normal; }
+.jersey-10-regular {
+    font-family: "Jersey 10", sans-serif !important;
+    font-weight: 400;
+    font-style: normal;
+}
+
 *, *::before, *::after { box-sizing: border-box; }
 
 body {
@@ -132,6 +137,7 @@ nav {
     align-items: center;
     min-height: 150px;
     font-weight: normal;
+
     h2{
         font-weight: normal;
     }
@@ -195,6 +201,7 @@ nav {
 }
 
 .card.red { color: #e74c3c; }
+
 .card.black { color: #2c3e50; }
 
 .card-top {
@@ -226,8 +233,10 @@ nav {
         #fff 10px,
         #fff 20px
     );
+
     border: 2px solid #fff;
 }
+
 .card.hidden * { display: none; } /* hide content */
 
 /* placeholder for empty table */
@@ -273,13 +282,13 @@ nav {
 }
 
 .preset-btn {
-     flex: 1;
-     background: #2ECC71;
-     color: #0A1914;
-     border: none;
-     padding: 8px 0;
-     border-radius: 5px;
-     cursor: pointer;
+    flex: 1;
+    background: #2ECC71;
+    color: #0A1914;
+    border: none;
+    padding: 8px 0;
+    border-radius: 5px;
+    cursor: pointer;
     font-family: "Jersey 10", sans-serif;
     font-size: 1.2em;
 }
@@ -307,17 +316,14 @@ nav {
     font-weight: normal;
     min-width: 120px;
 }
-.action-btn:hover { 
-    background: #1ABC9C; 
-}
+.action-btn:hover { background: #1ABC9C; }
 
 .action-btn.secondary { 
-    background: #e74c3c; color: white; 
+    background: #e74c3c;
+    color: white; 
 }
 
-.action-btn.secondary:hover {
-     background: #c0392b; 
-}
+.action-btn.secondary:hover { background: #c0392b; }
 
 .action-btn:disabled { 
     background: #555; cursor: not-allowed; opacity: 0.7; 
@@ -325,23 +331,61 @@ nav {
 
 /* MEDIA QUERIES (Mobile) */
 @media (max-width: 900px) {
-    nav { flex-direction: column; padding: 10px 15px; align-items: stretch; justify-content: flex-start; }
-    .nav-top { position: static; transform: none; width: 100%; justify-content: space-between; margin-bottom: 5px; }
-    .burger { display: flex; }
-    .nav-links { display: none; flex-direction: column; background: #0E2B24; margin-top: 10px; border-radius: 8px; }
-    nav.open .nav-links { display: flex; }
-    .nav-links a { border-bottom: 1px solid rgba(46, 204, 113, 0.1); display: block; text-align: center; }
+    nav {
+        flex-direction: column;
+        padding: 10px 15px;
+        align-items: stretch;
+        justify-content: flex-start;
+    }
     
-    .card { width: 60px; height: 90px; }
+    .nav-top {
+        position: static;
+        transform: none;
+        width: 100%;
+        justify-content: space-between;
+        margin-bottom: 5px;
+    }
+
+    .burger { display: flex; }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #0E2B24;
+        margin-top: 10px;
+        border-radius: 8px;
+    }
+
+    nav.open .nav-links { display: flex; }
+
+    .nav-links a {
+        border-bottom: 1px solid rgba(46, 204, 113, 0.1);
+        display: block;
+        text-align: center;
+    }
+    
+    .card {
+        width: 60px;
+        height: 90px;
+    }
+
     .card-top, .card-bottom { font-size: 1em; }
+
     .card-center { font-size: 1.8em; }
+
     .card-placeholder { width: 60px; height: 90px; }
 }
 
 @media (max-width: 600px) {
     .game-container { padding: 5px; }
+
     .controls-section { padding: 15px; }
-    .action-btn { padding: 12px 20px; font-size: 1em; min-width: 90px; }
+
+    .action-btn {
+        padding: 12px 20px;
+        font-size: 1em;
+        min-width: 90px;
+    }
 }
 
 /* --- UTILITY & TUTORIAL --- */
@@ -368,6 +412,7 @@ nav {
     z-index: 9999 !important;
     overflow: hidden;
 }
+
 .tutorial-box {
     position: fixed;
     background-color: #0E2B24;

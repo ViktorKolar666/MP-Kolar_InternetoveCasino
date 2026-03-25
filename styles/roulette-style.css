@@ -5,10 +5,7 @@
     font-style: normal;
 }
 
-/* important: box-sizing ensures padding doesn't break element width */
-*, *::before, *::after {
-    box-sizing: border-box;
-}
+*, *::before, *::after {  box-sizing: border-box;}
 
 html, body {
     margin: 0;
@@ -111,6 +108,7 @@ nav {
     background-color: #2ECC71;
     color: #0A1914;
 }
+
 .notUnlocked {
     background-image: url("../images/icons/lock.png");
     pointer-events: none;
@@ -121,8 +119,18 @@ nav {
     background-position: center;
 }
 
-.popup { position: relative; display: inline-block; cursor: pointer; }
-.icon-question { width: 16px; height: 16px; vertical-align: middle; margin-right: 5px; }
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.icon-question {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
 
 /* burgermenu */
 .burger {
@@ -161,11 +169,13 @@ nav {
     position: relative;
     margin-bottom: 20px;
 }
+
 .wheel-wrapper {
     position: relative;
     width: 400px;
     height: 400px;
 }
+
 .pointer {
     position: absolute;
     top: -15px;
@@ -200,18 +210,43 @@ nav {
     width: 100%;
     margin-bottom: 10px;
 }
-.betting-panel input {
-    padding: 10px; border: 1px solid #2ECC71; border-radius: 5px;
-    background: #0A1914; color: #D9F2EB; font-family: inherit;
-}
-.button {
-    background-color: #2ECC71; color: #0A1914; border: none; padding: 10px 30px;
-    border-radius: 8px; font-weight: normal; cursor: pointer; font-family: inherit; font-size: 1.4em;
-}
-.button:hover { background-color: #1ABC9C; }
-.button:disabled { background-color: #555; cursor: not-allowed; }
 
-.message { width: 100%; text-align: center; font-weight: normal; min-height: 24px; color: #ffd700; margin-top: 5px;}
+.betting-panel input {
+    padding: 10px;
+    border: 1px solid #2ECC71;
+    border-radius: 5px;
+    background: #0A1914;
+    color: #D9F2EB;
+    font-family: inherit;
+}
+
+.button {
+    background-color: #2ECC71;
+    color: #0A1914;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 8px;
+    font-weight: normal;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1.4em;
+}
+
+.button:hover { background-color: #1ABC9C; }
+
+.button:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+}
+
+.message {
+    width: 100%;
+    text-align: center;
+    font-weight: normal;
+    min-height: 24px;
+    color: #ffd700;
+    margin-top: 5px;
+}
 
 /* --- BET PRESET BUTTONS --- */
 .bet-presets {
@@ -234,9 +269,7 @@ nav {
     transition: background 0.2s;
 }
 
-.preset-btn:hover {
-    background-color: #1ABC9C;
-}
+.preset-btn:hover { background-color: #1ABC9C;}
 
 
 /* --- BETTING BOARD --- */
@@ -270,16 +303,20 @@ nav {
     color: #fff;
     background-color: #2c3e50; /* fallback */
 }
-.board-cell:hover { transform: scale(1.05); z-index: 2; }
-.board-cell.selected { border-color: #ffd700; box-shadow: 0 0 10px #ffd700; z-index: 5; }
+.board-cell:hover {
+    transform: scale(1.05);
+    z-index: 2;
+}
+
+.board-cell.selected {
+    border-color: #ffd700;
+    box-shadow: 0 0 10px #ffd700;
+    z-index: 5;
+}
 
 /* colors */
-.red {
-    background-color: #e74c3c;
-}
-.black {
-    background-color: #1f2a36;
-}
+.red { background-color: #e74c3c;}
+.black { background-color: #1f2a36;}
 .zero {
     background-color: #2ECC71;
     height: 158px; /* 3*50 + 2*4 gap */
@@ -295,17 +332,15 @@ nav {
     justify-content: center;
     flex-wrap: wrap;
 }
+
 .wide {
     width: 100px;
     background-color: #1f4037;
 }
 
-.red-bg {
-    background-color: #e74c3c;
-}
-.black-bg {
-    background-color: #1f2a36;
-}
+.red-bg {  background-color: #e74c3c;}
+
+.black-bg {  background-color: #1f2a36;}
 
 /* --- RESPONSIVENESS --- */
 
@@ -346,7 +381,10 @@ nav {
     /* show menu when 'open' class is added via JS */
     nav.open .nav-links { display: flex; }
 
-    .nav-links li { width: 100%; display: block; }
+    .nav-links li {
+        width: 100%;
+        display: block;
+    }
 
     /* link item styles */
     .nav-links a {
@@ -356,11 +394,19 @@ nav {
         text-align: center;
         border-bottom: 1px solid rgba(46, 204, 113, 0.1); /* separator line */
     }
+
     .nav-links a:last-child { border-bottom: none; }
 
     /* wheel resizing for tablets */
-    .wheel-wrapper { width: 300px; height: 300px; }
-    #canvas { width: 300px; height: 300px; }
+    .wheel-wrapper {
+        width: 300px;
+        height: 300px;
+    }
+
+    #canvas {
+        width: 300px;
+        height: 300px;
+    }
 }
 
 /* mobile phones */
@@ -382,15 +428,35 @@ nav {
     }
     
     /* adjust fonts & sizes for mobile */
-    h1 { font-size: 1.5em; margin-top: 20px; font-weight: normal;}
+    h1 {
+        font-size: 1.5em;
+        margin-top: 20px;
+        font-weight: normal;
+    }
     
-    .board-cell { width: 40px; height: 40px; font-size: 1em; }
+    .board-cell { 
+        width: 40px;
+        height: 40px;
+        font-size: 1em;
+    }
+
     .zero { height: 128px; } /* 3*40 + 2*4 gap */
-    .wide { width: 70px; font-size: 1em; }
+
+    .wide {
+        width: 70px; 
+        font-size: 1em; 
+    }
 
     /* further reduce wheel size */
-    .wheel-wrapper { width: 280px; height: 280px; }
-    #canvas { width: 280px; height: 280px; }
+    .wheel-wrapper { 
+        width: 280px; 
+        height: 280px; 
+    }
+
+    #canvas { 
+        width: 280px;
+         height: 280px;
+    }
 }
 
 /* tutorial styles */
@@ -454,6 +520,7 @@ nav {
 }
 
 .tut-btn-next:hover { background: #1ABC9C; }
+
 .tut-btn-skip:hover { border-color: #D9F2EB; }
 
 .highlight-box {

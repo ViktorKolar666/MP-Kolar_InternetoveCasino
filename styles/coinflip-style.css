@@ -1,5 +1,10 @@
 /* --- GLOBAL RESET & FONTS --- */
-.jersey-10-regular { font-family: "Jersey 10", sans-serif !important; font-weight: 400; font-style: normal; }
+.jersey-10-regular {
+    font-family: "Jersey 10",sans-serif !important;
+    font-weight: 400;
+    font-style: normal;
+}
+
 *, *::before, *::after { box-sizing: border-box; }
 
 body {
@@ -228,9 +233,7 @@ nav {
     font-size: 1.2em;
 }
 
-.preset-btn:hover {
-    background: #1ABC9C;
-}
+.preset-btn:hover {  background: #1ABC9C;}
 
 .action-buttons {
     display: flex;
@@ -272,23 +275,61 @@ nav {
 
 /* MEDIA QUERIES (Mobile) */
 @media (max-width: 900px) {
-    nav { flex-direction: column; padding: 10px 15px; align-items: stretch; justify-content: flex-start; }
-    .nav-top { position: static; transform: none; width: 100%; justify-content: space-between; margin-bottom: 5px; }
+    nav {
+        flex-direction: column;
+        padding: 10px 15px;
+        align-items: stretch;
+        justify-content: flex-start;
+    }
+
+    .nav-top {
+        position: static;
+        transform: none;
+        width: 100%;
+        justify-content: space-between;
+        margin-bottom: 5px;
+    }
+
     .burger { display: flex; }
-    .nav-links { display: none; flex-direction: column; background: #0E2B24; margin-top: 10px; border-radius: 8px; }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #0E2B24;
+        margin-top: 10px;
+        border-radius: 8px;
+    }
+
     nav.open .nav-links { display: flex; }
-    .nav-links a { border-bottom: 1px solid rgba(46, 204, 113, 0.1); display: block; text-align: center; }
+
+    .nav-links a {
+        border-bottom: 1px solid rgba(46, 204, 113, 0.1);
+        display: block;
+        text-align: center;
+    }
     
-    .card { width: 60px; height: 90px; }
+    .card {
+        width: 60px;
+        height: 90px;
+    }
+
     .card-top, .card-bottom { font-size: 1em; }
+
     .card-center { font-size: 1.8em; }
+
     .card-placeholder { width: 60px; height: 90px; }
 }
 
 @media (max-width: 600px) {
     .game-container { padding: 5px; }
+
     .controls-section { padding: 15px; }
-    .action-btn { padding: 12px 20px; font-size: 1em; min-width: 90px; }
+
+    .action-btn {
+        padding: 12px 20px;
+        font-size: 1em;
+        min-width: 90px;
+    }
 }
 
 /* --- UTILITY & TUTORIAL --- */

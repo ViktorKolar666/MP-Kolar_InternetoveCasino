@@ -5,9 +5,7 @@
     font-style: normal;
 }
 
-*, *::before, *::after {
-    box-sizing: border-box;
-}
+*, *::before, *::after {  box-sizing: border-box;}
 
 body {
     background-color: #0A1914;
@@ -79,9 +77,7 @@ nav {
     font-size: 1.2em;
 }
 
-.nav-links li {
-    display: inline-block;
-}
+.nav-links li {  display: inline-block;}
 
 .nav-links a {
     text-decoration: none;
@@ -198,6 +194,7 @@ header {
     width: 100%;
     box-sizing: border-box;
 }
+
 .left-panel input::placeholder { color: rgba(217,242,235,0.7); }
 
 .left-panel button.button {
@@ -212,12 +209,24 @@ header {
     font-family: "Jersey 10", Arial, sans-serif;
     width: 100%;
 }
+
 .left-panel button:hover { background-color: #1ABC9C; }
 
-.error-message { color: rgb(255, 0, 0); font-size: 0.9em; margin: 5px 0 0; display: none; }
+.error-message {
+    color: rgb(255, 0, 0);
+    font-size: 0.9em;
+    margin: 5px 0 0;
+    display: none;
+}
+
 .left-panel input.error { border-color: rgb(255, 0, 0); }
 
-.bet-presets { display: flex; gap: 5px; margin-top: 5px; }
+.bet-presets {
+    display: flex;
+    gap: 5px; 
+    margin-top: 5px;
+}
+
 .preset-btn {
     flex: 1;
     background: #2ECC71;
@@ -245,15 +254,21 @@ header {
     flex-direction: column;
     gap: 4px;
 }
+
 .win-entry {
     font-family: "Jersey 10", Arial, sans-serif;
     padding: 2px 0;
     font-weight: normal;
 }
+
 .win-x50, .win-x30 { color: #ffd000; }
+
 .win-x15, .win-x10, .win-x5 { color: #ff5722; }
+
 .win-x2 { color: #2ECC71; }
+
 .win-x1 { color: #1ABC9C; }
+
 .win-x05 { color: #D9F2EB; opacity: 0.7; }
 
 /* --- RESPONSIVENESS --- */
@@ -292,7 +307,10 @@ header {
 
     nav.open .nav-links { display: flex; }
 
-    .nav-links li { width: 100%; display: block; }
+    .nav-links li {
+        width: 100%;
+        display: block;
+    }
 
     .nav-links a {
         display: block;
@@ -301,6 +319,7 @@ header {
         text-align: center;
         border-bottom: 1px solid rgba(46, 204, 113, 0.1);
     }
+
     .nav-links a:last-child { border-bottom: none; }
 
     /* game layout adjustments */
@@ -312,7 +331,11 @@ header {
         width: 100%;
         margin-top: 10px;
     }
-    .left-panel { width: 100%; max-width: 500px; }
+
+    .left-panel {
+        width: 100%;
+        max-width: 500px;
+    }
 }
 
 /* mobile phones */
@@ -362,6 +385,7 @@ header {
     z-index: 9999 !important;
     overflow: hidden;
 }
+
 .tutorial-box {
     position: fixed;
     background-color: #0E2B24;

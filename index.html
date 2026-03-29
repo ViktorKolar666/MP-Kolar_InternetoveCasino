@@ -13,52 +13,56 @@
 <body>
     <nav>
         <div class="nav-top">
-            <div class="currency-display">Tokens: <span id="currency"></span> tkn</div>
+            <div class="langage-switcher" style="display: flex; gap: 10px; cursor: pointer; align-items: center;">
+                <img src="images/icons/cz-flag.png" alt="CZ" width="24" onclick="changeLanguage('cs')">
+                <img src="images/icons/en-flag.png" alt="ENG" width="24" onclick="changeLanguage('en')">
+            </div>
+            <div class="currency-display"><span class="lang" data-en="Tokens:" data-cs="Žetony:">Tokens:</span> <span id="currency"></span> tkn</div>
             <button id="menu-toggle" class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
                 <span></span><span></span><span></span>
             </button>
         </div>
         <ul id="nav-links" class="nav-links">
-            <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="coinflip.html">Coinflip</a></li>
-            <li><a href="roulette.html" class="notUnlocked">Roulette</a></li>
-            <li><a href="blackjack.html" class="notUnlocked">Blackjack</a></li>
-            <li><a href="plinko.html" class="notUnlocked">Plinko</a></li>
+            <li><a href="index.html" class="active lang" data-en="Home" data-cs="Domů">Home</a></li>
+            <li><a href="coinflip.html" class="lang" data-en="Coinflip" data-cs="Hod mincí">Coinflip</a></li>
+            <li><a href="roulette.html" class="notUnlocked lang" data-en="Roulette" data-cs="Ruleta">Roulette</a></li>
+            <li><a href="blackjack.html" class="notUnlocked lang" data-en="Blackjack" data-cs="Blackjack">Blackjack</a></li>
+            <li><a href="plinko.html" class="notUnlocked lang" data-en="Plinko" data-cs="Plinko">Plinko</a></li>
         </ul>
     </nav>
 
     <header>
-        <h1>Casino simulator</h1>
+        <h1 class="lang" data-en="Casino simulator" data-cs="Casino simulátor">Casino simulator</h1>
     </header>
 
     <div class="game-cards">
 
         <div class="card" data-game="coinflip.html" data-price="0">
-            <a href="coinflip.html">Coinflip</a>
-            <p class="description">50/50 chance to double your tokens!</p>
+            <a href="coinflip.html" class="lang" data-en="Coinflip" data-cs="Hod mincí">Coinflip</a>
+            <p class="description lang" data-en="50/50 chance to double your tokens!" data-cs="Šance 50/50 na zdvojnásobení tokenů!">50/50 chance to double your tokens!</p>
         </div>
 
         <div class="card" data-game="roulette.html" data-price="500">
-            <a href="roulette.html">Roulette</a>
-            <p class="description">Spin the wheel and test your luck!</p>
-            <button class="unlock-btn" onclick="triggerBuy('roulette.html', 500)">Unlock: 500 tkn</button>
+            <a href="roulette.html" class="lang" data-en="Roulette" data-cs="Ruleta">Roulette</a>
+            <p class="description lang" data-en="Spin the wheel and test your luck!" data-cs="Zatoč kolem a zkus štěstí!">Spin the wheel and test your luck!</p>
+            <button class="unlock-btn lang" onclick="triggerBuy('roulette.html', 500)" data-en="Unlock: 500 tkn" data-cs="Odemknout: 500 tkn">Unlock: 500 tkn</button>
         </div>
 
         <div class="card" data-game="blackjack.html" data-price="1000">
-            <a href="blackjack.html">Blackjack</a>
-            <p class="description">Try to beat the dealer!</p>
-            <button class="unlock-btn" onclick="triggerBuy('blackjack.html', 1000)">Unlock: 1000 tkn</button>
+            <a href="blackjack.html" class="lang" data-en="Blackjack" data-cs="Blackjack">Blackjack</a>
+            <p class="description lang" data-en="Try to beat the dealer!" data-cs="Zkus porazit dealera!">Try to beat the dealer!</p>
+            <button class="unlock-btn lang" onclick="triggerBuy('blackjack.html', 1000)" data-en="Unlock: 1000 tkn" data-cs="Odemknout: 1000 tkn">Unlock: 1000 tkn</button>
         </div>
 
         <div class="card" data-game="plinko.html" data-price="5000">
-            <a href="plinko.html">Plinko</a>
-            <p class="description">Drop balls and win prizes!</p>
-            <button class="unlock-btn" onclick="triggerBuy('plinko.html', 5000)">Unlock: 5000 tkn</button>
+            <a href="plinko.html" class="lang" data-en="Plinko" data-cs="Plinko">Plinko</a>
+            <p class="description lang" data-en="Drop balls and win prizes!" data-cs="Vhazuj kuličky a vyhraj!">Drop balls and win prizes!</p>
+            <button class="unlock-btn lang" onclick="triggerBuy('plinko.html', 5000)" data-en="Unlock: 5000 tkn" data-cs="Odemknout: 5000 tkn">Unlock: 5000 tkn</button>
         </div>
 
     </div>
 
-    <button id="reset-all-btn" class="reset-all-btn">Reset Progress</button>
+    <button id="reset-all-btn" class="reset-all-btn lang" data-en="Reset Progress" data-cs="Resetovat postup">Reset Progress</button>
 
     <script src="scripts/currency.js"></script>
 
@@ -74,9 +78,25 @@
             });
         }
         
-        // --- MAIN PAGE LOGIC ---
+        // --- MULTILANGUAGE ---
+        function changeLanguage(lang) {
+            localStorage.setItem('selectedLang', lang);
+            const elements = document.querySelectorAll('.lang');
+            elements.forEach(el => {
+                const translation = el.getAttribute(`data-${lang}`);
+                if (translation) {
+                    el.innerHTML = translation;
+                }
+            });
+        }
+
+        // Set saved language on page load
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedLang = localStorage.getItem('selectedLang') || 'en';
+            changeLanguage(savedLang);
+        });
         
-        // function to update card status - if locked/unlocked
+        // --- MAIN PAGE LOGIC ---
         function updateCardsStatus() {
             const cards = document.querySelectorAll('.card[data-price]');
             
@@ -84,10 +104,8 @@
                 const gameFile = card.getAttribute('data-game');
                 const price = parseInt(card.getAttribute('data-price'));
                 
-                // iheck if game is unlocked using currency.js function
                 const isUnlocked = isGameUnlocked(gameFile);
                 
-                // if price is 0 or game is in unlocked list
                 if (price === 0 || isUnlocked) {
                     card.classList.remove('locked');
                 } else {
@@ -96,19 +114,15 @@
             });
         }
 
-        // wrapper function to buy game and refresh UI immediately
         function triggerBuy(game, price) {
-            buyGame(game, price); // from currency.js
-            updateCardsStatus();  // refresh visuals
+            buyGame(game, price); 
+            updateCardsStatus();  
         }
 
-        // expose update function to window for currency.js to call
         window.updateMainUI = updateCardsStatus;
 
-        // run on page load
         document.addEventListener('DOMContentLoaded', updateCardsStatus);
 
-        // reset button logic
         document.getElementById("reset-all-btn").addEventListener("click", () => {
             if(typeof resetProgress === 'function') {
                 resetProgress();

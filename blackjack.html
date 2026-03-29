@@ -13,30 +13,34 @@
 <body>
     <nav>
         <div class="nav-top">
-            <div class="currency-display">Tokens: <span id="currency"></span> tkn</div>
+            <div class="langage-switcher" style="display: flex; gap: 10px; cursor: pointer; align-items: center;">
+                <img src="images/icons/cz-flag.png" alt="CZ" width="24" onclick="changeLanguage('cs')">
+                <img src="images/icons/en-flag.png" alt="ENG" width="24" onclick="changeLanguage('en')">
+            </div>
+            <div class="currency-display"><span class="lang" data-en="Tokens:" data-cs="Žetony:">Tokens:</span> <span id="currency"></span> tkn</div>
             <button id="menu-toggle" class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
                 <span></span><span></span><span></span>
             </button>
         </div>
 
         <ul id="nav-links" class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="coinflip.html">Coinflip</a></li>
-            <li><a href="roulette.html" class="notUnlocked">Roulette</a></li>
-            <li><a href="blackjack.html" class="active notUnlocked">Blackjack</a></li>
-            <li><a href="plinko.html" class="notUnlocked">Plinko</a></li>
+            <li><a href="index.html" class="lang" data-en="Home" data-cs="Domů">Home</a></li>
+            <li><a href="coinflip.html" class="lang" data-en="Coinflip" data-cs="Hod mincí">Coinflip</a></li>
+            <li><a href="roulette.html" class="notUnlocked lang" data-en="Roulette" data-cs="Ruleta">Roulette</a></li>
+            <li><a href="blackjack.html" class="active notUnlocked lang" data-en="Blackjack" data-cs="Blackjack">Blackjack</a></li>
+            <li><a href="plinko.html" class="notUnlocked lang" data-en="Plinko" data-cs="Plinko">Plinko</a></li>
         </ul>
     </nav>
 
     <header>
-        <h1>Blackjack</h1>
+        <h1 class="lang" data-en="Blackjack" data-cs="Blackjack">Blackjack</h1>
     </header>
 
     <div class="game-container">
         <div class="blackjack-board">
             
             <div id="dealer-hand" class="hand-section">
-                <h2>Dealer <span id="dealer-score" class="score-badge">0</span></h2>
+                <h2><span class="lang" data-en="Dealer" data-cs="Krupiér">Dealer</span> <span id="dealer-score" class="score-badge">0</span></h2>
                 <div id="dealer-cards" class="cards-container">
                     <div class="card-placeholder"></div>
                     <div class="card-placeholder"></div>
@@ -44,11 +48,11 @@
             </div>
 
             <div class="divider">
-                <div id="game-message" class="game-message">Place your bet to start</div>
+                <div id="game-message" class="game-message lang" data-en="Place your bet to start" data-cs="Vsaď si pro zahájení hry">Place your bet to start</div>
             </div>
 
             <div id="player-hand" class="hand-section">
-                <h2>You <span id="player-score" class="score-badge">0</span></h2>
+                <h2><span class="lang" data-en="You" data-cs="Ty">You</span> <span id="player-score" class="score-badge">0</span></h2>
                 <div id="player-cards" class="cards-container">
                     <div class="card-placeholder"></div>
                     <div class="card-placeholder"></div>
@@ -58,32 +62,32 @@
 
         <div class="controls-section">
             <div class="popup" onclick="startTutorial()">
-                <p><img src="images/icons/tutorial.png" alt="Question Icon" class="icon-question">Tutorial</p>
+                <p><img src="images/icons/tutorial.png" alt="Question Icon" class="icon-question"><span class="lang" data-en="Tutorial" data-cs="Jak hrát">Tutorial</span></p>
             </div>
             
             <div id="betting-controls" class="betting-panel">
-                <label>Bet Amount:</label>
+                <label class="lang" data-en="Bet Amount:" data-cs="Výše sázky:">Bet Amount:</label>
                 <input type="number" id="bet-amount" min="1" placeholder="Amount">
                 
                 <div class="bet-presets">
-                    <button type="button" class="preset-btn" data-value="1">Min</button>
+                    <button type="button" class="preset-btn lang" data-value="1" data-en="Min" data-cs="Min">Min</button>
                     <button type="button" class="preset-btn" data-value="10">10</button>
                     <button type="button" class="preset-btn" data-value="100">100</button>
                     <button type="button" class="preset-btn" data-value="1000">1000</button>
-                    <button type="button" class="preset-btn" data-value="max">Max</button>
+                    <button type="button" class="preset-btn lang" data-value="max" data-en="Max" data-cs="Max">Max</button>
                 </div>
-                
+
                 <div class="bet-adjusters">
                     <button type="button" class="adjust-btn" onclick="adjustBet(-5)">- 5</button>
                     <button type="button" class="adjust-btn" onclick="adjustBet(5)">+ 5</button>
                 </div>
 
-                <button id="deal-btn" class="button action-btn">DEAL</button>
+                <button id="deal-btn" class="button action-btn lang" data-en="DEAL" data-cs="ROZDAT">DEAL</button>
             </div>
 
             <div id="game-actions" class="action-panel" style="display: none;">
-                <button id="hit-btn" class="button action-btn">HIT</button>
-                <button id="stand-btn" class="button action-btn secondary">STAND</button>
+                <button id="hit-btn" class="button action-btn lang" data-en="HIT" data-cs="TÁHNOUT">HIT</button>
+                <button id="stand-btn" class="button action-btn secondary lang" data-en="STAND" data-cs="STÁT">STAND</button>
             </div>
         </div>
     </div>
@@ -94,7 +98,7 @@
             <h3 id="tut-title">Welcome!</h3>
             <p id="tut-text">Tutorial text...</p>
             <div class="tut-buttons">
-                <button onclick="endTutorial()" class="tut-btn-skip">Skip</button>
+                <button onclick="endTutorial()" class="tut-btn-skip lang" data-en="Skip" data-cs="Přeskočit">Skip</button>
                 <button onclick="nextStep()" class="tut-btn-next">Next</button>
             </div>
         </div>
@@ -116,7 +120,24 @@
             });
         }
 
-        //tutorial logic
+        // --- MULTILANGUAGE ---
+        function changeLanguage(lang) {
+            localStorage.setItem('selectedLang', lang);
+            const elements = document.querySelectorAll('.lang');
+            elements.forEach(el => {
+                const translation = el.getAttribute(`data-${lang}`);
+                if (translation) {
+                    el.innerHTML = translation;
+                }
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedLang = localStorage.getItem('selectedLang') || 'en';
+            changeLanguage(savedLang);
+        });
+
+        // tutorial logic
         let currentStep = 0;
         const overlay = document.getElementById('tutorial-overlay');
         const box = document.getElementById('tutorial-box');
@@ -128,43 +149,43 @@
         const steps = [
             {
                 target: null,
-                title: "Welcome to Blackjack!",
-                text: "The goal is to place your bets and try to get a hand value as close to 21 as possible without going over."
+                title: { en: "Welcome to Blackjack!", cs: "Vítej u Blackjacku!" },
+                text: { en: "The goal is to place your bets and try to get a hand value as close to 21 as possible without going over.", cs: "Cílem je vsadit si a dosáhnout hodnoty karet co nejblíže 21, aniž bys tuto hodnotu překročil." }
             },
             {
                 target: "#bet-amount",
-                title: "Place Your Bet",
-                text: "Enter the amount of tokens you want to wager here. The maximum bet is half your total tokens."
+                title: { en: "Place Your Bet", cs: "Vsaď si" },
+                text: { en: "Enter the amount of tokens you want to wager here. The maximum bet is half your total tokens.", cs: "Zde zadej počet žetonů, které chceš vsadit. Maximální sázka je polovina tvých celkových žetonů." }
             },
             {
                 target: ".bet-presets",
-                title: "Bet Presets",
-                text: "Use these buttons to quickly set your bet amount to common values."
+                title: { en: "Bet Presets", cs: "Rychlé sázky" },
+                text: { en: "Use these buttons to quickly set your bet amount to common values.", cs: "Pomocí těchto tlačítek si rychle nastavíš výchozí hodnoty sázek." }
             },
             {
                 target: ".blackjack-board",
-                title: "Playing the Game",
-                text: "Here's where the action happens! Your and the dealer's cards will be displayed here.You can also see your current hand values."
+                title: { en: "Playing the Game", cs: "Hrací plocha" },
+                text: { en: "Here's where the action happens! Your and the dealer's cards will be displayed here. You can also see your current hand values.", cs: "Tady se odehrává samotná hra! Zde uvidíš své karty i karty krupiéra, včetně aktuální hodnoty." }
             },
             {
                 target: "#dealer-hand",
-                title: "Dealer's Hand",
-                text: "The dealer's hand is displayed here. The dealer must hit until their hand value is at least 17."
+                title: { en: "Dealer's Hand", cs: "Karty krupiéra" },
+                text: { en: "The dealer's hand is displayed here. The dealer must hit until their hand value is at least 17.", cs: "Zde jsou karty krupiéra. Krupiér musí táhnout další kartu, dokud nemá hodnotu alespoň 17." }
             },
             {
                 target: "#player-hand",
-                title: "Your Hand",
-                text: "Your hand is displayed here. You can choose to Hit to receive another card or Stand to keep your current hand."
+                title: { en: "Your Hand", cs: "Tvoje karty" },
+                text: { en: "Your hand is displayed here. You can choose to Hit to receive another card or Stand to keep your current hand.", cs: "Tady jsou tvé karty. Můžeš zvolit 'Táhnout' (Hit) pro další kartu, nebo 'Stát' (Stand), pokud ti karty stačí." }
             },
             {
                 target: "#deal-btn",
-                title: "Deal the Cards",
-                text: "Click this button to deal the cards and start the round. The dealer and you will each receive two cards, but one of the dealer's cards will be hidden."
+                title: { en: "Deal the Cards", cs: "Rozdat karty" },
+                text: { en: "Click this button to deal the cards and start the round. The dealer and you will each receive two cards, but one of the dealer's cards will be hidden.", cs: "Kliknutím na toto tlačítko rozdáš karty a začneš kolo. Ty i krupiér dostanete dvě karty, ale jedna z krupiérových karet bude skrytá." }
             },
             {
                 target: null,
-                title: "Good Luck!",
-                text: "That's the end of the tutorial. Good luck and have fun playing Blackjack!"
+                title: { en: "Good Luck!", cs: "Hodně štěstí!" },
+                text: { en: "That's the end of the tutorial. Good luck and have fun playing Blackjack!", cs: "To je konec návodu. Hodně štěstí a bav se hrou!" }
             }
         ];
 
@@ -246,9 +267,16 @@
 
         function showStep(index) {
             const step = steps[index];
-            title.innerText = step.title;
-            text.innerText = step.text;
-            nextBtn.innerText = (index === steps.length - 1) ? "Play!" : "Next";
+            const currentLang = localStorage.getItem('selectedLang') || 'en';
+
+            title.innerText = step.title[currentLang];
+            text.innerText = step.text[currentLang];
+            
+            if (index === steps.length - 1) {
+                nextBtn.innerText = currentLang === 'cs' ? "Hrát!" : "Play!";
+            } else {
+                nextBtn.innerText = currentLang === 'cs' ? "Další" : "Next";
+            }
 
             if (step.target) {
                 const targetEl = document.querySelector(step.target);

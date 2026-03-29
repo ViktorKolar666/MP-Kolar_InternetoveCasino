@@ -14,53 +14,56 @@
 <body>
     <nav>
         <div class="nav-top">
-            <div class="currency-display">Tokens: <span id="currency"></span> tkn</div>
+            <div class="langage-switcher" style="display: flex; gap: 10px; cursor: pointer; align-items: center;">
+                <img src="images/icons/cz-flag.png" alt="CZ" width="24" onclick="changeLanguage('cs')">
+                <img src="images/icons/en-flag.png" alt="ENG" width="24" onclick="changeLanguage('en')">
+            </div>
+            <div class="currency-display"><span class="lang" data-en="Tokens:" data-cs="Žetony:">Tokens:</span> <span id="currency"></span> tkn</div>
             <button id="menu-toggle" class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
                 <span></span><span></span><span></span>
             </button>
         </div>
 
         <ul id="nav-links" class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="coinflip.html">Coinflip</a></li>
-            <li><a href="roulette.html" class="notUnlocked">Roulette</a></li>
-            <li><a href="blackjack.html" class="notUnlocked">Blackjack</a></li>
-            <li><a href="plinko.html" class="active notUnlocked">Plinko</a></li>
+            <li><a href="index.html" class="lang" data-en="Home" data-cs="Domů">Home</a></li>
+            <li><a href="coinflip.html" class="lang" data-en="Coinflip" data-cs="Hod mincí">Coinflip</a></li>
+            <li><a href="roulette.html" class="notUnlocked lang" data-en="Roulette" data-cs="Ruleta">Roulette</a></li>
+            <li><a href="blackjack.html" class="notUnlocked lang" data-en="Blackjack" data-cs="Blackjack">Blackjack</a></li>
+            <li><a href="plinko.html" class="active notUnlocked lang" data-en="Plinko" data-cs="Plinko">Plinko</a></li>
         </ul>
     </nav>
 
     <header>
-        <h1>Plinko</h1>
+        <h1 class="lang" data-en="Plinko" data-cs="Plinko">Plinko</h1>
     </header>
     
     <div class="game-container">
         <div class="left-panel">
             <div class="popup" onclick="startTutorial()">
-                <p><img src="images/icons/tutorial.png" alt="Question Icon" class="icon-question">Tutorial</p>
-                <p style="font-size: 1em;">*If the game isn't loaded properly, please refresh the page.</p>
+                <p><img src="images/icons/tutorial.png" alt="Question Icon" class="icon-question"><span class="lang" data-en="Tutorial" data-cs="Jak hrát">Tutorial</span></p>
+                <p style="font-size: 1em;" class="lang" data-en="*If the game isn't loaded properly, please refresh the page." data-cs="*Pokud se hra nenačte správně, obnovte prosím stránku.">*If the game isn't loaded properly, please refresh the page.</p>
             </div>
 
-            <label for="bet-amount">Bet Amount:</label>
+            <label for="bet-amount" class="lang" data-en="Bet Amount:" data-cs="Výše sázky:">Bet Amount:</label>
             <input type="number" id="bet-amount" min="1" placeholder="Enter your bet">
             
             <div class="bet-presets">
-                <button type="button" class="preset-btn" data-value="1">Min</button>
+                <button type="button" class="preset-btn lang" data-value="1" data-en="Min" data-cs="Min">Min</button>
                 <button type="button" class="preset-btn" data-value="10">10</button>
                 <button type="button" class="preset-btn" data-value="100">100</button>
                 <button type="button" class="preset-btn" data-value="1000">1000</button>
-                <button type="button" class="preset-btn" data-value="max">Max</button>
+                <button type="button" class="preset-btn lang" data-value="max" data-en="Max" data-cs="Max">Max</button>
             </div>
 
-            
             <div class="bet-adjusters">
                 <button type="button" class="adjust-btn" onclick="adjustBet(-5)">- 5</button>
                 <button type="button" class="adjust-btn" onclick="adjustBet(5)">+ 5</button>
             </div>
             
             <p id="bet-error" class="error-message"></p>
-            <button id="start-game" class="button">Start Game</button>
+            <button id="start-game" class="button lang" data-en="Start Game" data-cs="Spustit hru">Start Game</button>
             
-            <label>Most recent wins:</label>
+            <label class="lang" data-en="Most recent wins:" data-cs="Poslední výhry:">Most recent wins:</label>
             <div id="win-history" class="win-history"></div>
         </div>
         
@@ -73,7 +76,7 @@
             <h3 id="tut-title">Welcome!</h3>
             <p id="tut-text">Tutorial text...</p>
             <div class="tut-buttons">
-                <button onclick="endTutorial()" class="tut-btn-skip">Skip</button>
+                <button onclick="endTutorial()" class="tut-btn-skip lang" data-en="Skip" data-cs="Přeskočit">Skip</button>
                 <button onclick="nextStep()" class="tut-btn-next">Next</button>
             </div>
         </div>
@@ -95,6 +98,23 @@
             });
         }
 
+        // --- MULTILANGUAGE ---
+        function changeLanguage(lang) {
+            localStorage.setItem('selectedLang', lang);
+            const elements = document.querySelectorAll('.lang');
+            elements.forEach(el => {
+                const translation = el.getAttribute(`data-${lang}`);
+                if (translation) {
+                    el.innerHTML = translation;
+                }
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedLang = localStorage.getItem('selectedLang') || 'en';
+            changeLanguage(savedLang);
+        });
+
         // tutorial logic
         let currentStep = 0;
         const overlay = document.getElementById('tutorial-overlay');
@@ -107,38 +127,38 @@
         const steps = [
             {
                 target: null,
-                title: "Welcome to Plinko!",
-                text: "The goal is to drop a ball, navigate the maze of pins, and land in a high-value slot."
+                title: { en: "Welcome to Plinko!", cs: "Vítej v Plinku!" },
+                text: { en: "The goal is to drop a ball, navigate the maze of pins, and land in a high-value slot.", cs: "Cílem je vhodit kuličku, projít bludištěm kolíků a trefit políčko s vysokou hodnotou." }
             },
             {
                 target: "#bet-amount",
-                title: "Place Your Bet",
-                text: "Enter the amount of tokens you want to wager here. You must have enough funds."
+                title: { en: "Place Your Bet", cs: "Vsaď si" },
+                text: { en: "Enter the amount of tokens you want to wager here. You must have enough funds.", cs: "Zde zadej počet žetonů, které chceš vsadit. Musíš mít dostatek prostředků." }
             },
             {
                 target: ".bet-presets",
-                title: "Quick Bets",
-                text: "Alternatively, use these buttons to quickly set your bet amount (Min, Max, etc.)."
+                title: { en: "Quick Bets", cs: "Rychlé sázky" },
+                text: { en: "Alternatively, use these buttons to quickly set your bet amount (Min, Max, etc.).", cs: "Případně použij tato tlačítka k rychlému nastavení výše sázky (Min, Max atd.)." }
             },
             {
                 target: ".win-history",
-                title: "Win History",
-                text: "Track your last 15 results here. It shows the multiplier hit and the tokens won."
+                title: { en: "Win History", cs: "Historie výher" },
+                text: { en: "Track your last 15 results here. It shows the multiplier hit and the tokens won.", cs: "Zde najdeš svých posledních 15 výsledků. Ukazuje se trefený násobitel a vyhrané žetony." }
             },
             {
                 target: "#plinko-canvas",
-                title: "The Game Board",
-                text: "The ball drops from the top. The edges pay less, while the center pays the most."
+                title: { en: "The Game Board", cs: "Hrací plocha" },
+                text: { en: "The ball drops from the top. The edges pay less, while the center pays the most.", cs: "Kulička padá shora. Kraje platí méně, zatímco střed platí nejvíce." }
             },
             {
                 target: "#start-game",
-                title: "Drop the Ball",
-                text: "Click this button to drop the ball and start the game!"
+                title: { en: "Drop the Ball", cs: "Vhoď kuličku" },
+                text: { en: "Click this button to drop the ball and start the game!", cs: "Kliknutím na toto tlačítko vhodíš kuličku a začneš hru!" }
             },
             {
                 target: null,
-                title: "Good Luck!",
-                text: "That's the end of the tutorial. Good luck and have fun playing Plinko!"
+                title: { en: "Good Luck!", cs: "Hodně štěstí!" },
+                text: { en: "That's the end of the tutorial. Good luck and have fun playing Plinko!", cs: "To je z návodu vše. Hodně štěstí a dobře se bav u Plinka!" }
             }
         ];
 
@@ -220,9 +240,16 @@
 
         function showStep(index) {
             const step = steps[index];
-            title.innerText = step.title;
-            text.innerText = step.text;
-            nextBtn.innerText = (index === steps.length - 1) ? "Play!" : "Next";
+            const currentLang = localStorage.getItem('selectedLang') || 'en';
+
+            title.innerText = step.title[currentLang];
+            text.innerText = step.text[currentLang];
+            
+            if (index === steps.length - 1) {
+                nextBtn.innerText = currentLang === 'cs' ? "Hrát!" : "Play!";
+            } else {
+                nextBtn.innerText = currentLang === 'cs' ? "Další" : "Next";
+            }
 
             if (step.target) {
                 const targetEl = document.querySelector(step.target);

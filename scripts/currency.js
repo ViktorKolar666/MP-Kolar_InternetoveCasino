@@ -138,6 +138,7 @@ function resetProgress() {
     }
 }
 
+// --- BET ADJUSTMENT ---
 function adjustBet(amount) {
     const betInput = document.getElementById('bet-amount');
     // if bet input is empty or invalid, treat it as 0
@@ -154,6 +155,29 @@ function adjustBet(amount) {
 
     betInput.dispatchEvent(new Event('input')); // doesn't change logical value, just triggers event listeners that react to user input
 }
+
+// --- LANGUAGE SWITCHING ---
+function changeLanguage(lang) {
+    // save selected language to localStorage so it persists across pages and reloads
+    localStorage.setItem('selectedLang', lang);
+    
+    // find all elements that should be translated (marked with class "lang")
+    const elements = document.querySelectorAll('.lang');
+    
+    elements.forEach(el => {
+        // get the translation for the current language from data attributes (e.g., data-en, data-cs)
+        const translation = el.getAttribute(`data-${lang}`);
+        if (translation) {
+            el.innerHTML = translation;
+        }
+    });
+}
+
+// when page loads, apply the saved language preference (default to English if not set)
+document.addEventListener("DOMContentLoaded", () => {
+    const savedLang = localStorage.getItem('selectedLang') || 'en';
+    changeLanguage(savedLang);
+});
 
 // --- INITIALIZATION ---
 document.addEventListener('DOMContentLoaded', () => {

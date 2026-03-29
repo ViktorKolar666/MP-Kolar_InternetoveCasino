@@ -13,23 +13,27 @@
 <body>
     <nav>
         <div class="nav-top">
-            <div class="currency-display">Tokens: <span id="currency"></span> tkn</div>
+            <div class="langage-switcher" style="display: flex; gap: 10px; cursor: pointer; align-items: center;">
+                <img src="images/icons/cz-flag.png" alt="CZ" width="24" onclick="changeLanguage('cs')">
+                <img src="images/icons/en-flag.png" alt="ENG" width="24" onclick="changeLanguage('en')">
+            </div>
+            <div class="currency-display"><span class="lang" data-en="Tokens:" data-cs="Žetony:">Tokens:</span> <span id="currency"></span> tkn</div>
             <button id="menu-toggle" class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
                 <span></span><span></span><span></span>
             </button>
         </div>
 
         <ul id="nav-links" class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="coinflip.html">Coinflip</a></li>
-            <li><a href="roulette.html"class="active notUnlocked">Roulette</a></li>
-            <li><a href="blackjack.html" class="notUnlocked">Blackjack</a></li>
-            <li><a href="plinko.html" class="notUnlocked">Plinko</a></li>
+            <li><a href="index.html" class="lang" data-en="Home" data-cs="Domů">Home</a></li>
+            <li><a href="coinflip.html" class="lang" data-en="Coinflip" data-cs="Hod mincí">Coinflip</a></li>
+            <li><a href="roulette.html" class="active notUnlocked lang" data-en="Roulette" data-cs="Ruleta">Roulette</a></li>
+            <li><a href="blackjack.html" class="notUnlocked lang" data-en="Blackjack" data-cs="Blackjack">Blackjack</a></li>
+            <li><a href="plinko.html" class="notUnlocked lang" data-en="Plinko" data-cs="Plinko">Plinko</a></li>
         </ul>
     </nav>
 
     <header>
-        <h1>Roulette</h1>
+        <h1 class="lang" data-en="Roulette" data-cs="Ruleta">Roulette</h1>
     </header>
 
     <div class="game-container">
@@ -37,34 +41,34 @@
             <div class="wheel-wrapper">
                 <div class="pointer"></div>
                 <canvas id="canvas" width="400" height="400">
-                    Canvas not supported, please use another browser.
+                    <span class="lang" data-en="Canvas not supported, please use another browser." data-cs="Prohlížeč nepodporuje Canvas, použij prosím jiný.">Canvas not supported, please use another browser.</span>
                 </canvas>
             </div>
         </div>
 
         <div class="controls-section">
             <div class="popup" onclick="startTutorial()">
-                <p><img src="images/icons/tutorial.png" alt="Question Icon" class="icon-question">Tutorial</p>
+                <p><img src="images/icons/tutorial.png" alt="Question Icon" class="icon-question"><span class="lang" data-en="Tutorial" data-cs="Jak hrát">Tutorial</span></p>
             </div>
 
             <div class="betting-panel">
-                <label>Bet Amount:</label>
+                <label class="lang" data-en="Bet Amount:" data-cs="Výše sázky:">Bet Amount:</label>
                 <input type="number" id="bet-amount" min="1" placeholder="Amount">
                 
                 <div class="selected-bet-display">
-                    Betting on: <span id="selected-bet-text" style="color: #ffd700;">Nothing</span>
+                    <span class="lang" data-en="Betting on:" data-cs="Sázíš na:">Betting on:</span> <span id="selected-bet-text" style="color: #ffd700;" class="lang" data-en="Nothing" data-cs="Nic">Nothing</span>
                 </div>
                 
-                <button id="spin-btn" class="button">SPIN</button>
+                <button id="spin-btn" class="button lang" data-en="SPIN" data-cs="ZATOČIT">SPIN</button>
                 <div id="message-area" class="message"></div>
             </div>
 
             <div class="bet-presets">
-                <button type="button" class="preset-btn" data-value="1">Min</button>
+                <button type="button" class="preset-btn lang" data-value="1" data-en="Min" data-cs="Min">Min</button>
                 <button type="button" class="preset-btn" data-value="10">10</button>
                 <button type="button" class="preset-btn" data-value="100">100</button>
                 <button type="button" class="preset-btn" data-value="1000">1000</button>
-                <button type="button" class="preset-btn" data-value="max">Max</button>
+                <button type="button" class="preset-btn lang" data-value="max" data-en="Max" data-cs="Max">Max</button>
             </div>
             
             <div class="bet-adjusters">
@@ -138,10 +142,10 @@
                 </div>
                 
                 <div class="outside-bets">
-                    <div class="board-cell wide red-bg" onclick="selectBet('red')">RED</div>
-                    <div class="board-cell wide black-bg" onclick="selectBet('black')">BLACK</div>
-                    <div class="board-cell wide" onclick="selectBet('even')">EVEN</div>
-                    <div class="board-cell wide" onclick="selectBet('odd')">ODD</div>
+                    <div class="board-cell wide red-bg lang" data-en="RED" data-cs="ČERVENÁ" onclick="selectBet('red')">RED</div>
+                    <div class="board-cell wide black-bg lang" data-en="BLACK" data-cs="ČERNÁ" onclick="selectBet('black')">BLACK</div>
+                    <div class="board-cell wide lang" data-en="EVEN" data-cs="SUDÁ" onclick="selectBet('even')">EVEN</div>
+                    <div class="board-cell wide lang" data-en="ODD" data-cs="LICHÁ" onclick="selectBet('odd')">ODD</div>
                 </div>
         </div>
     </div>
@@ -152,7 +156,7 @@
             <h3 id="tut-title">Welcome!</h3>
             <p id="tut-text">Tutorial text...</p>
             <div class="tut-buttons">
-                <button onclick="endTutorial()" class="tut-btn-skip">Skip</button>
+                <button onclick="endTutorial()" class="tut-btn-skip lang" data-en="Skip" data-cs="Přeskočit">Skip</button>
                 <button onclick="nextStep()" class="tut-btn-next">Next</button>
             </div>
         </div>
@@ -177,6 +181,23 @@
             });
         }
 
+        // --- MULTILANGUAGE ---
+        function changeLanguage(lang) {
+            localStorage.setItem('selectedLang', lang);
+            const elements = document.querySelectorAll('.lang');
+            elements.forEach(el => {
+                const translation = el.getAttribute(`data-${lang}`);
+                if (translation) {
+                    el.innerHTML = translation;
+                }
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedLang = localStorage.getItem('selectedLang') || 'en';
+            changeLanguage(savedLang);
+        });
+
         // tutorial logic
         let currentStep = 0;
         const overlay = document.getElementById('tutorial-overlay');
@@ -189,43 +210,43 @@
         const steps = [
             {
                 target: null,
-                title: "Welcome to Roulette!",
-                text: "The goal is to place your bets and try to predict where the ball will land on the wheel."
+                title: { en: "Welcome to Roulette!", cs: "Vítej u Rulety!" },
+                text: { en: "The goal is to place your bets and try to predict where the ball will land on the wheel.", cs: "Cílem je vsadit si a zkusit uhodnout, na kterém políčku se kulička zastaví." }
             },
             {
                 target: "#bet-amount",
-                title: "Place Your Bet",
-                text: "Enter the amount of tokens you want to wager here. The maximum bet is half your total tokens."
+                title: { en: "Place Your Bet", cs: "Vsaď si" },
+                text: { en: "Enter the amount of tokens you want to wager here. The maximum bet is half your total tokens.", cs: "Zde zadej počet žetonů, které chceš vsadit. Maximální sázka je polovina tvých celkových žetonů." }
             },
             {
                 target: ".bet-presets",
-                title: "Quick Bets",
-                text: "Alternatively, use these buttons to quickly set your bet amount (Min, Max, etc.)."
+                title: { en: "Quick Bets", cs: "Rychlé sázky" },
+                text: { en: "Alternatively, use these buttons to quickly set your bet amount (Min, Max, etc.).", cs: "Případně použij tato tlačítka k rychlému nastavení výše sázky (Min, Max atd.)." }
             },
             {
                 target: ".roulette-board",
-                title: "Boarding Bets",
-                text: "Click on any number to place your bet there. You can only bet on one spot at a time."
+                title: { en: "Boarding Bets", cs: "Sázky na čísla" },
+                text: { en: "Click on any number to place your bet there. You can only bet on one spot at a time.", cs: "Kliknutím na jakékoli číslo na něj vsadíš. Najednou můžeš vsadit pouze na jedno místo." }
             },  
             {
                 target: ".outside-bets",
-                title: "Outside Bets",
-                text: "You can also place bets on outside options like Red/Black or Even/Odd for different odds."
+                title: { en: "Outside Bets", cs: "Vedlejší sázky" },
+                text: { en: "You can also place bets on outside options like Red/Black or Even/Odd for different odds.", cs: "Můžeš také sázet na vedlejší možnosti, jako je Červená/Černá nebo Sudá/Lichá, které mají jiné kurzy." }
             },
             {
                 target: ".wheel-section",
-                title: "This is the Wheel",
-                text: "Here is where the wheel will spin and eventually pointer will land on a number."
+                title: { en: "This is the Wheel", cs: "Ruletové kolo" },
+                text: { en: "Here is where the wheel will spin and eventually pointer will land on a number.", cs: "Zde se bude kolo točit a ukazatel se nakonec zastaví na jednom z čísel." }
             },
             {
                 target: "#spin-btn",
-                title: "Spin the wheel!",
-                text: "Once you've placed your bet, click the SPIN button to spin the wheel."
+                title: { en: "Spin the wheel!", cs: "Zatoč kolem!" },
+                text: { en: "Once you've placed your bet, click the SPIN button to spin the wheel.", cs: "Jakmile máš vsazeno, klikni na tlačítko ZATOČIT." }
             },
             {
                 target: null,
-                title: "Good Luck!",
-                text: "That's the end of the tutorial. Good luck and have fun playing Roulette!"
+                title: { en: "Good Luck!", cs: "Hodně štěstí!" },
+                text: { en: "That's the end of the tutorial. Good luck and have fun playing Roulette!", cs: "To je z návodu vše. Hodně štěstí a dobře se bav u Rulety!" }
             }
         ];
 
@@ -307,9 +328,16 @@
 
         function showStep(index) {
             const step = steps[index];
-            title.innerText = step.title;
-            text.innerText = step.text;
-            nextBtn.innerText = (index === steps.length - 1) ? "Play!" : "Next";
+            const currentLang = localStorage.getItem('selectedLang') || 'en';
+
+            title.innerText = step.title[currentLang];
+            text.innerText = step.text[currentLang];
+            
+            if (index === steps.length - 1) {
+                nextBtn.innerText = currentLang === 'cs' ? "Hrát!" : "Play!";
+            } else {
+                nextBtn.innerText = currentLang === 'cs' ? "Další" : "Next";
+            }
 
             if (step.target) {
                 const targetEl = document.querySelector(step.target);

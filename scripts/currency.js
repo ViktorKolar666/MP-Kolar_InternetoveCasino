@@ -138,6 +138,23 @@ function resetProgress() {
     }
 }
 
+function adjustBet(amount) {
+    const betInput = document.getElementById('bet-amount');
+    // if bet input is empty or invalid, treat it as 0
+    let currentBet = parseFloat(betInput.value) || 0;
+    
+    let newBet = currentBet + amount;
+
+    // bet can't go below 1
+    if (newBet < 1) {
+        newBet = 1;
+    }
+
+    betInput.value = newBet;
+
+    betInput.dispatchEvent(new Event('input')); // doesn't change logical value, just triggers event listeners that react to user input
+}
+
 // --- INITIALIZATION ---
 document.addEventListener('DOMContentLoaded', () => {
     updateTokenDisplay();

@@ -217,7 +217,6 @@ nav {
     border-radius: 5px;
     background: #0A1914;
     color: #D9F2EB;
-    font-family: inherit;
 }
 
 .button {
@@ -252,12 +251,12 @@ nav {
 .bet-presets {
     display: flex;
     gap: 5px;
-    margin-bottom: 15px; /* space between presets and the board */
+    margin-bottom: 15px;
     width: 100%;
 }
 
 .preset-btn {
-    flex: 1; /* distribute space evenly */
+    flex: 1;
     background: #2ECC71;
     color: #0A1914;
     border: none;
@@ -270,6 +269,35 @@ nav {
 }
 
 .preset-btn:hover { background-color: #1ABC9C;}
+
+.bet-adjusters {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.adjust-btn {
+    flex: 1;
+    background: transparent;
+    color: #2ECC71;
+    border: 2px solid #2ECC71;
+    border-radius: 5px;
+    padding: 6px 0;
+    font-family: "Pixelify Sans", Arial, sans-serif;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.adjust-btn:hover {
+    background: #2ECC71;
+    color: #0A1914;
+}
+
+.adjust-btn:active { transform: scale(0.95);}
 
 
 /* --- BETTING BOARD --- */

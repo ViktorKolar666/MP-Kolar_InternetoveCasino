@@ -4,6 +4,22 @@ const message = document.getElementById('result-message');
 const redBtn = document.getElementById('red-btn');
 const blueBtn = document.getElementById('blue-btn');
 
+// --- TEXTS ---
+const coinflipTexts = {
+    invalidBet: { en: "Invalid bet amount!", cs: "Neplatná částka sázky!" },
+    notEnough: { en: "Not enough tokens!", cs: "Nemáš dostatek žetonů!" },
+    flipping: { en: "Flipping...", cs: "Házení..." },
+    red: { en: "RED", cs: "ČERVENÁ" },
+    blue: { en: "BLUE", cs: "MODRÁ" },
+    win: { en: "It is {color}! You win {amount} tokens!", cs: "Padla {color}! Vyhráváš {amount} žetonů!" },
+    lose: { en: "It is {color}! You lose {amount} tokens!", cs: "Padla {color}! Prohráváš {amount} žetonů!" }
+};
+
+function getCfText(key) {
+    const lang = localStorage.getItem('selectedLang') || 'en';
+    return coinflipTexts[key][lang];
+}
+
 let isFlipping = false;
 
 function flipCoin(choice)
@@ -16,12 +32,12 @@ function flipCoin(choice)
     if (!isNaN(betAmount)) betInput.value = betAmount;
 
     if (isNaN(betAmount) || betAmount <= 0) {
-        message.innerText = "Invalid bet amount!";
+        message.innerText = getCfText('invalidBet');
         message.style.color = "#ff0000";        
         return;
     }
     if (betAmount > getTokens()) {
-        message.innerText = "Not enough tokens!";
+        message.innerText = getCfText('notEnough');
         message.style.color = "#ff0000";
         return;
     }
@@ -34,7 +50,7 @@ function flipCoin(choice)
     // block buttons
     redBtn.disabled = true;
     blueBtn.disabled = true;
-    message.innerText = "Flipping...";
+    message.innerText = getCfText('flipping');
     message.style.color = "#ffd700";
 
     // 3. calculate result
@@ -67,13 +83,16 @@ function flipCoin(choice)
             won = true;
             winAmount = betAmount * 2;
         }
+        
+        const translatedColor = getCfText(resultColor);
+        
         if (won) {
             setTokens(getTokens() + winAmount);
             updateTokenDisplay();
-            message.innerText = `It is ${resultColor.toUpperCase()}! You win ${winAmount} tokens!`;
+            message.innerText = getCfText('win').replace('{color}', translatedColor).replace('{amount}', winAmount);
             message.style.color = '#2ED137';
         } else {
-            message.innerText = `It is ${resultColor.toUpperCase()}! You lose ${betAmount} tokens!`;
+            message.innerText = getCfText('lose').replace('{color}', translatedColor).replace('{amount}', betAmount);
             message.style.color = '#ff0000';
         }
         

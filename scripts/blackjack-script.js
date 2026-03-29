@@ -1,3 +1,21 @@
+// --- TEXTS ---
+const blackjackTexts = {
+    invalidBet: { en: "Invalid bet amount!", cs: "Neplatná částka sázky!" },
+    notEnough: { en: "Not enough tokens!", cs: "Nemáš dostatek žetonů!" },
+    hitOrStand: { en: "Hit or Stand?", cs: "Táhnout nebo stát?" },
+    playerBust: { en: "BUST! You went over 21.", cs: "BUST! Překročil jsi 21." },
+    dealerBust: { en: "Dealer BUST! You Win!", cs: "Krupiér má BUST! Vyhráváš!" },
+    youWin: { en: "You Win!", cs: "Vyhráváš!" },
+    dealerWins: { en: "Dealer Wins!", cs: "Krupiér vyhrává!" },
+    push: { en: "Push! It's a tie.", cs: "Remíza! Vrací se sázka." },
+    playAgain: { en: "PLAY AGAIN", cs: "HRÁT ZNOVU" }
+};
+
+function getBjText(key) {
+    const lang = localStorage.getItem('selectedLang') || 'en';
+    return blackjackTexts[key][lang];
+}
+
 // --- GAME STATE ---
 let deck = [];
 let dealerHand = [];
@@ -136,11 +154,11 @@ dealBtn.addEventListener('click', () => {
     if (!isNaN(amount)) betInput.value = amount;
 
     if (isNaN(amount) || amount <= 0) {
-        setMessage("Invalid bet amount!", "red");
+        setMessage(getBjText('invalidBet'), "red");
         return;
     }
     if (amount > getTokens()) {
-        setMessage("Not enough tokens!", "red");
+        setMessage(getBjText('notEnough'), "red");
         return;
     }
 
@@ -157,7 +175,7 @@ dealBtn.addEventListener('click', () => {
     // UI switch
     bettingControls.style.display = 'none';
     gameActions.style.display = 'flex';
-    setMessage("Hit or Stand?");
+    setMessage(getBjText('hitOrStand'));
     
     updateBoard(false);
 
@@ -203,21 +221,21 @@ function handleGameOver() {
     let color = "#ffd700";
 
     if (pScore > 21) {
-        message = "BUST! You went over 21.";
+        message = getBjText('playerBust');
         color = "#e74c3c";
     } else if (dScore > 21) {
-        message = "Dealer BUST! You Win!";
+        message = getBjText('dealerBust');
         color = "#2ECC71";
         setTokens(getTokens() + (currentBet * 2));
     } else if (pScore > dScore) {
-        message = `You Win! (${pScore} vs ${dScore})`;
+        message = `${getBjText('youWin')} (${pScore} vs ${dScore})`;
         color = "#2ECC71";
         setTokens(getTokens() + (currentBet * 2));
     } else if (dScore > pScore) {
-        message = `Dealer Wins! (${dScore} vs ${pScore})`;
+        message = `${getBjText('dealerWins')} (${dScore} vs ${pScore})`;
         color = "#e74c3c";
     } else {
-        message = "Push! It's a tie.";
+        message = getBjText('push');
         setTokens(getTokens() + currentBet); // return bet
     }
 
@@ -227,7 +245,7 @@ function handleGameOver() {
     // reset UI after short delay or change button text
     gameActions.style.display = 'none';
     bettingControls.style.display = 'flex'; // show bet controls again
-    dealBtn.innerText = "PLAY AGAIN";
+    dealBtn.innerText = getBjText('playAgain');
 }
 
 // --- PRESET BUTTONS ---

@@ -1,3 +1,22 @@
+// --- TEXTS ---
+const rouletteTexts = {
+    pleaseSelect: { en: "Please select a bet on the table!", cs: "Prosím, vyber si sázku na stole!" },
+    invalidBet: { en: "Invalid bet amount!", cs: "Neplatná částka sázky!" },
+    spinning: { en: "Spinning...", cs: "Roztáčí se..." },
+    red: { en: "RED", cs: "ČERVENÁ" },
+    black: { en: "BLACK", cs: "ČERNÁ" },
+    even: { en: "EVEN", cs: "SUDÁ" },
+    odd: { en: "ODD", cs: "LICHÁ" },
+    win: { en: "WIN! Number {number}. You won {amount} tokens!", cs: "VÝHRA! Číslo {number}. Vyhráváš {amount} žetonů!" },
+    loss: { en: "Loss. Number {number}. Better luck next time!", cs: "Prohra. Číslo {number}. Hodně štěstí příště!" }
+};
+
+function getRouletteText(key) {
+    const lang = localStorage.getItem('selectedLang') || 'en';
+    // If the key doesn't exist in the texts, return the key itself (useful for dynamic keys like numbers or if we forgot to add a translation)
+    return rouletteTexts[key] ? rouletteTexts[key][lang] : key;
+}
+
 // WHEEL CONFIGURATION 
 // European roulette number sequence (clockwise)
 const rouletteNumbers = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
@@ -52,8 +71,8 @@ window.selectBet = function(selection) {
         event.currentTarget.classList.add('selected');
     }
 
-    // 4. update UI text
-    document.getElementById('selected-bet-text').innerText = selection.toUpperCase();
+    // 4. update UI text (překládáme barvy/sudá/lichá, čísla zůstanou čísly)
+    document.getElementById('selected-bet-text').innerText = getRouletteText(selection).toUpperCase();
 }
 
 // --- GAME LOGIC ---
@@ -75,12 +94,12 @@ spinBtn.addEventListener('click', () => {
     
     // validation
     if (!currentBetSelection) {
-        messageArea.innerText = "Please select a bet on the table!";
+        messageArea.innerText = getRouletteText('pleaseSelect');
         messageArea.style.color = "#ffd700";
         return;
     }
     if (isNaN(betAmount) || betAmount <= 0) {
-        messageArea.innerText = "Invalid bet amount!";
+        messageArea.innerText = getRouletteText('invalidBet');
         messageArea.style.color = "#ffd700";
         return;
     }
@@ -89,7 +108,7 @@ spinBtn.addEventListener('click', () => {
     setTokens(getTokens() - betAmount);
     updateTokenDisplay();
     
-    messageArea.innerText = "Spinning...";
+    messageArea.innerText = getRouletteText('spinning');
     messageArea.style.color = "#ffd700";
     
     // disable button and start spin
@@ -140,10 +159,10 @@ function alertPrize(indicatedSegment) {
     if (won) {
         setTokens(getTokens() + winAmount);
         updateTokenDisplay();
-        messageArea.innerText = `WIN! Number ${winningNumber}. You won ${winAmount} tokens!`;
+        messageArea.innerText = getRouletteText('win').replace('{number}', winningNumber).replace('{amount}', winAmount);
         messageArea.style.color = "#2ECC71";
     } else {
-        messageArea.innerText = `Loss. Number ${winningNumber}. Better luck next time!`;
+        messageArea.innerText = getRouletteText('loss').replace('{number}', winningNumber);
         messageArea.style.color = "#e74c3c";
     }
 
